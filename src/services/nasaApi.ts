@@ -1,5 +1,6 @@
 import axios from "axios";
 import AstronomyPictureOfTheDay from "../models/AstronomyPictureOfTheDay";
+import NASAImage from "../models/NASAImage";
 
 const baseUrl: string = "https://api.nasa.gov";
 const apiKey: string =
@@ -10,3 +11,10 @@ export const getAstronomyPictureOfTheDay =
     return (await axios.get(`${baseUrl}/planetary/apod?api_key=${apiKey}`))
       .data;
   };
+
+export const getNASAImagesBySearch = async (
+  search: string
+): Promise<NASAImage[]> => {
+  return (await axios.get(`https://images-api.nasa.gov/search?q=${search}`))
+    .data.collection.items;
+};
