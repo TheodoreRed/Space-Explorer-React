@@ -1,0 +1,92 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-bottom: 1px solid black;
+}
+
+.Header h1 .h1Content {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.Header h1 span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+}
+
+.Header .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.Header .h1Content:hover {
+  color: black;
+}
+
+.Header .h1Active {
+  color: black;
+}
+
+.Header .profileNavigationContainer {
+  display: none;
+}
+
+.Header .profileNavigationContainer.navActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  right: 0;
+}
+
+.Header .googleIcon {
+  position: absolute;
+  top: 20px;
+  right: 55px;
+  color: green;
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.Header .googleIcon:hover {
+  color: rgb(5, 71, 5);
+}
+
+.Header .iconActive {
+  color: rgb(5, 71, 5);
+}
+
+.Header .profileNavigationContainer {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.Header .profileNavigationContainer a {
+  text-decoration: none;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.Header .profileNavigationContainer a:hover {
+  text-decoration: 1px underline;
+}
+
+.Header .signOutBtn,
+.Header .signInBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}

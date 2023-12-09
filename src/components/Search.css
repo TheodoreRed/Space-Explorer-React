@@ -1,0 +1,64 @@
+.Search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.Search .searchHeader {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.Search form.searchForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.Search .searchBar {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.Search .searchBar:focus {
+  border-color: #007bff;
+}
+
+.Search .searchBtn {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.Search .searchBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Adjustments when search is active */
+.Search.active form.searchForm {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Search.active .searchBar {
+  width: 70%;
+  transition: width 0.3s ease;
+}
+
+.Search.active .searchFooter {
+  display: flex;
+  gap: 10px;
+}

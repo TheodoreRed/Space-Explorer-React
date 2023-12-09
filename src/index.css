@@ -1,0 +1,28 @@
+body,
+h1,
+h2,
+h3,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}

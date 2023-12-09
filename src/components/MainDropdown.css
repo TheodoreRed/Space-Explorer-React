@@ -1,0 +1,80 @@
+.MainDropdown {
+  background-color: #8be0fb;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+  position: absolute;
+}
+
+.MainDropdown .columnContainer {
+  display: flex;
+}
+
+.MainDropdown h3 {
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+  border-bottom: 4px solid black;
+  background-color: #46c1e8;
+}
+
+.MainDropdown .eventColumn .eventColumnFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transform: translateY(10px);
+}
+
+.MainDropdown .eventColumn a,
+.MainDropdown .learnColumn a,
+.MainDropdown .searchContainer a {
+  display: block;
+  color: black;
+  padding: 10px;
+  margin: 10px;
+  font-weight: 100;
+  background-color: #46c1e8;
+  font-size: 22px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.MainDropdown .searchContainer a {
+  margin: 0 10px;
+}
+
+.MainDropdown .eventColumn h3 {
+  border-top-right-radius: 20px;
+}
+.MainDropdown .learnColumn h3 {
+  border-top-left-radius: 20px;
+}
+
+.MainDropdown .searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.MainDropdown .searchContainer a {
+  border-radius: 0 0 20px 20px;
+  color: black;
+  padding: 10px 20px;
+  font-size: 25px;
+  max-width: 100%;
+}
+
+.MainDropdown .searchContainer a {
+  flex-basis: 100%;
+  font-weight: bold;
+}
+
+.MainDropdown .eventColumn a:hover,
+.MainDropdown .learnColumn a:hover,
+.MainDropdown .searchContainer a:hover {
+  background-color: #5ad1f2;
+  color: white;
+  transform: scale(1.05);
+}
