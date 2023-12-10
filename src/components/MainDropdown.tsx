@@ -8,8 +8,8 @@ const MainDropdown = () => {
         <div className="learnColumn">
           <h3>Learn</h3>
           <Link to="/spacecrafts">Spacecrafts</Link>
-          <Link to="/astronauts">Astronaut</Link>
-          <Link to="/planets">Planet</Link>
+          <Link to="/astronauts">Astronauts</Link>
+          <Link to="/planets">Planets</Link>
         </div>
         <div className="eventColumn">
           <h3>Events</h3>

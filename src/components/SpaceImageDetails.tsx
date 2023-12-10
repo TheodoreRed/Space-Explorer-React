@@ -24,7 +24,7 @@ const SpaceImageDetails = () => {
   const dateCreated = image?.data[0].date_created;
 
   const formatDate = (str: string) => {
-    return str ? str.slice(0, 10) : "";
+    return str.slice(0, 10);
   };
 
   const handleDownload = () => {
