@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import { useContext } from "react";
 import AuthContext from "./context/AuthContext";
 import Search from "./components/Search";
+import SpaceImageDetails from "./components/SpaceImageDetails";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/search" element={<Search />}></Route>
+        <Route path="/search/images/:nasa_id" element={<SpaceImageDetails />} />
       </Routes>
     </BrowserRouter>
   );

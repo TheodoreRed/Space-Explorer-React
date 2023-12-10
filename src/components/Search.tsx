@@ -43,9 +43,11 @@ const Search = () => {
         </button>
       </form>
       {searchActive && <p>{`Showing results for: ${lastSearch}`}</p>}
-      {NASAImages?.map((image) => (
-        <SpaceImage key={image.data[0].nasa_id} image={image} />
-      ))}
+      {NASAImages && <p>{NASAImages.length} matches</p>}
+      {NASAImages &&
+        NASAImages?.map((image) => (
+          <SpaceImage key={image.data[0].nasa_id} image={image} />
+        ))}
     </div>
   );
 };

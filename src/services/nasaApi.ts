@@ -18,3 +18,8 @@ export const getNASAImagesBySearch = async (
   return (await axios.get(`https://images-api.nasa.gov/search?q=${search}`))
     .data.collection.items;
 };
+
+export const getNASAImagesById = async (id: string): Promise<NASAImage> => {
+  return (await axios.get(`https://images-api.nasa.gov/search?q=${id}`)).data
+    .collection.items[0];
+};

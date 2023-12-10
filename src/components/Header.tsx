@@ -41,6 +41,7 @@ const Header = () => {
             className={`profileNavigationContainer ${
               showProfileNav && "navActive"
             }`}
+            onClick={() => setShowProfileNav(false)}
           >
             {user && <Link to="/profile">Profile</Link>}
             <Link to="/">Home</Link>

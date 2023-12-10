@@ -1,0 +1,47 @@
+.SpaceImageDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.SpaceImageDetails .title {
+  font-size: 28px;
+  color: #0056b3;
+  margin-bottom: 15px;
+}
+
+.SpaceImageDetails .description,
+.SpaceImageDetails .date-created {
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.SpaceImageDetails .image {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.SpaceImageDetails .download-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.SpaceImageDetails .download-button:hover {
+  background-color: #218838;
+}
