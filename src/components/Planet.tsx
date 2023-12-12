@@ -9,7 +9,7 @@ const Planet = ({ planet }: Props) => {
     <div className="Planet">
       <h2>{planet.name}</h2>
       <p>{planet.description}</p>
-      <p>{planet.knownFor}</p>
+      <img src={planet.images[0]} alt="" />
     </div>
   );
 };

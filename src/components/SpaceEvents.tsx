@@ -9,7 +9,17 @@ const SpaceEvents = () => {
   useEffect(() => {
     getAllUpcomingSpaceEvents().then((res) => setSpaceEvents(res));
   }, []);
-  return <div className="SpaceEvents">SpaceEvents works</div>;
+  console.log(spaceEvents);
+  return (
+    <div className="SpaceEvents">
+      <ul>
+        {spaceEvents &&
+          spaceEvents.map((oneEvent) => {
+            return <li key={oneEvent.id}>{oneEvent.name}</li>;
+          })}
+      </ul>
+    </div>
+  );
 };
 
 export default SpaceEvents;

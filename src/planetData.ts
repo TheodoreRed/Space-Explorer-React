@@ -1,3 +1,4 @@
+import mercuryImage1 from "./assets/mercury.jpg";
 const mercury: Planet = {
   name: "Mercury",
   diameter: 4879.4,
@@ -16,7 +17,7 @@ const mercury: Planet = {
   discoveryYear: "Prehistoric",
   description:
     "Mercury is the smallest planet in our solar system and nearest to the Sun. It is only slightly larger than Earth's Moon and its surface is covered in impact craters.",
-  images: [],
+  images: [mercuryImage1],
   composition: [],
   knownFor: [
     "Being the closest planet to the Sun",
