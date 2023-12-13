@@ -28,6 +28,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
           const newAccount: Account = {
             uid: user.uid,
             displayName: user.displayName ?? "",
+            photoURL: user.photoURL ?? "",
             uniqueName: "",
             email: user.email ?? "",
             darkMode: false,

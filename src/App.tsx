@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import SpaceImageDetails from "./components/SpaceImageDetails";
 import Planets from "./components/Planets";
 import SpaceEvents from "./components/SpaceEvents";
+import SpaceEventDetails from "./components/SpaceEventDetails";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/search/images/:nasa_id" element={<SpaceImageDetails />} />
         <Route path="/planets" element={<Planets />} />
         <Route path="/upcoming" element={<SpaceEvents />} />
+        <Route path="/upcoming/:id" element={<SpaceEventDetails />} />
       </Routes>
     </BrowserRouter>
   );
