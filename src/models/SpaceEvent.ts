@@ -53,7 +53,7 @@ interface Agency {
   type: string; // Govt, Commercial
 }
 
-interface Program {
+export interface Program {
   id: number;
   name: string; // Name of the program
   description: string; // Description of the program
@@ -63,7 +63,7 @@ interface Program {
   agencies: Agency[]; // Agencies involved in the program
 }
 
-interface Launch {
+export interface Launch {
   id: string;
   name: string; // Name of the launch
   probability?: number | null; // Probability of launch

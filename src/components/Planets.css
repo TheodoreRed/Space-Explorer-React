@@ -1,0 +1,17 @@
+.Planets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Planets nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Planets nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

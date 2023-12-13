@@ -1,0 +1,10 @@
+.ProgramDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.ProgramDetails img {
+  width: 30%;
+  position: relative;
+  left: 36%;
+}

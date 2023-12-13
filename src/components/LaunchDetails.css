@@ -1,0 +1,9 @@
+.LaunchDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.LaunchDetails a {
+  display: flex;
+  flex-direction: column;
+}
