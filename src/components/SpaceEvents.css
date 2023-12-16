@@ -1,0 +1,11 @@
+.SpaceEvents nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.SpaceEvents nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

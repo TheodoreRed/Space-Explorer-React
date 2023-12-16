@@ -13,7 +13,11 @@ const SpaceEvents = () => {
   console.log(spaceEvents);
   return (
     <div className="SpaceEvents">
-      <nav>Events/Upcoming</nav>
+      <nav>
+        <div>
+          Events/<strong>Upcoming</strong>
+        </div>
+      </nav>
       <ul>
         {spaceEvents &&
           spaceEvents.map((oneEvent) => {

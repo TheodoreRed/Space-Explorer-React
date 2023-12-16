@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { planets } from "../planetData";
 import Planet from "./Planet";
 import "./Planets.css";

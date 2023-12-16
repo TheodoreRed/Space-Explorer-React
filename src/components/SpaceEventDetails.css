@@ -48,3 +48,9 @@
 .SpaceEventDetails button:hover {
   background-color: #3c528b;
 }
+
+.SpaceEventDetails .chatGPT {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

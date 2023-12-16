@@ -1,7 +1,8 @@
 import axios from "axios";
 import Account from "../models/Account";
 
-const baseUrl: string = import.meta.env.VITE_APP_BASE_URL ?? "NOT FOUND";
+const baseUrl: string =
+  import.meta.env.VITE_APP_BASE_URL ?? "NOT FOUND CHECK SERVICES FOLDER";
 
 export const getAccountById = async (uid: string): Promise<Account | void> => {
   try {

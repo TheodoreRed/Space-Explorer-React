@@ -18,8 +18,6 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
-
       getAccountById(user.uid).then((res) => {
         if (res && res._id) {
           setAccount(res);
@@ -44,7 +42,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, account }}>
+    <AuthContext.Provider value={{ user, account, setAccount }}>
       {children}
     </AuthContext.Provider>
   );
