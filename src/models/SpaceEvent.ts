@@ -111,6 +111,9 @@ export default interface SpaceEvent {
   launches: Launch[]; // Array of launches related to the event
   spacestations: SpaceStation[]; // Array of space stations related to the event
   program: Program[]; // Array of programs related to the event
-  interested?: number;
+  interested: number;
   comments: SpaceEventComment[];
+  savedBy: string[];
+  detailedInfo: string;
+  keyWords: string[];
 }

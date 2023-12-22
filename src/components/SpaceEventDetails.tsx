@@ -2,84 +2,65 @@ import { useContext, useEffect, useState } from "react";
 import "./SpaceEventDetails.css";
 import SpaceEvent from "../models/SpaceEvent";
 import { Link, useParams } from "react-router-dom";
-import { getSpaceEventById } from "../services/theSpaceDevsApi";
+import {
+  getSpaceEventById,
+  toggleSpaceEventInterest,
+} from "../services/theSpaceDevsApi";
 import AuthContext from "../context/AuthContext";
 import ProgramDetails from "./ProgramDetails";
 import LaunchDetails from "./LaunchDetails";
 import { signInWithGoogle } from "../firebaseConfig";
-import { updateAccountById } from "../services/accountApi";
-import Account from "../models/Account";
-import { generateTextWithOpenAI } from "../services/openAiApi";
+import { getAccountById } from "../services/accountApi";
+import NASAImage from "../models/NASAImage";
+import { getNASAImagesBySearch } from "../services/nasaApi";
 
 const SpaceEventDetails = () => {
   const { account, user, setAccount } = useContext(AuthContext);
   const [spaceEvent, setSpaceEvent] = useState<SpaceEvent | null>(null);
-  const [detailedInfo, setDetailedInfo] = useState("");
+  const [currentKeyWord, setCurrentKeyWord] = useState("");
+  const [NASAImages, setNASAImages] = useState<NASAImage[] | null>(null);
+  const [displayKeyWords, setDisplayKeyWords] = useState(false);
   const id: string | undefined = useParams().id;
-
-  const gptClickHandler = async () => {
-    if (spaceEvent) {
-      const prompt = `Expand greatly on this space event: ${spaceEvent.name} Date:${spaceEvent.date} Short Description: ${spaceEvent.description}.`;
-      const response = await generateTextWithOpenAI(prompt);
-
-      if (response) {
-        setDetailedInfo(response);
-      }
-    }
-  };
 
   useEffect(() => {
     if (id) {
       getSpaceEventById(id).then((res) => {
         if (res) {
           setSpaceEvent(res);
+          setCurrentKeyWord(res.keyWords[0]); // Set the first keyword by default
         }
       });
-      setSpaceEvent(spaceEvent);
     }
   }, [id]);
 
+  useEffect(() => {
+    if (currentKeyWord) {
+      getNASAImagesBySearch(currentKeyWord).then(setNASAImages);
+    }
+  }, [currentKeyWord]);
+
   const eventIsSaved = () => {
-    return account?.savedEvents.some((item) => {
-      return item._id === spaceEvent?._id;
-    });
+    return account?.savedEvents.some((item) => item._id === spaceEvent?._id);
   };
 
   const saveHandler = async () => {
-    if (account && spaceEvent) {
-      let updatedAccount: Account;
-
-      if (eventIsSaved()) {
-        // If event is already saved, remove it from the savedEvents
-        updatedAccount = {
-          ...account,
-          savedEvents: account.savedEvents.filter(
-            (event) => event._id !== spaceEvent._id
-          ),
-        };
-        console.log("Event removed from saved events.");
-      } else {
-        // If event is not saved, add it to the savedEvents
-        updatedAccount = {
-          ...account,
-          savedEvents: [...account.savedEvents, spaceEvent],
-        };
-        console.log("Event added to saved events.");
-      }
-
+    if (account && account._id && spaceEvent) {
       try {
-        if (account._id) {
-          const response = await updateAccountById(account._id, updatedAccount);
-          if (response) {
-            setAccount(response);
-          }
-        }
+        await toggleSpaceEventInterest(spaceEvent._id, account._id);
+        const updatedAccount = await getAccountById(account.uid);
+        const updatedSpaceEvent = await getSpaceEventById(spaceEvent._id);
+        if (updatedAccount) setAccount(updatedAccount);
+        if (updatedSpaceEvent) setSpaceEvent(updatedSpaceEvent);
       } catch (error) {
-        console.error("Error updating account:", error);
+        console.error("Error updating space event interest:", error);
       }
     } else {
       console.log("No account or event found.");
     }
+  };
+
+  const switchKeyword = (keyword: string) => {
+    setCurrentKeyWord(keyword);
   };
 
   return (
@@ -89,58 +70,91 @@ const SpaceEventDetails = () => {
           <nav>
             <div>
               Events/<Link to="/upcoming">Upcoming</Link>/
-              <strong>{`${spaceEvent.name}`}</strong>
+              <strong>{spaceEvent.name}</strong>
             </div>
           </nav>
           <h2>{spaceEvent.name}</h2>
           <p>{spaceEvent.description}</p>
           <p>Event: {spaceEvent.type.name}</p>
           <p>Date: {spaceEvent.date.slice(0, 10)}</p>
-          <p>Interested: {spaceEvent?.interested ?? 0}</p>
+          <p>Interested: {spaceEvent.interested ?? 0}</p>
           {spaceEvent.news_url && (
             <a
               href={spaceEvent.news_url}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <p>News URL: {spaceEvent.news_url}</p>
+              News URL: {spaceEvent.news_url}
             </a>
           )}
           {account && user ? (
-            <button onClick={() => saveHandler()}>
+            <button className="event-btn" onClick={saveHandler}>
               {eventIsSaved() ? "Event Saved" : "Save"}
             </button>
           ) : (
             <button onClick={signInWithGoogle}>Login To Save</button>
           )}
-
-          <section className="chatGPT">
-            <button
-              className="detailedInfoBtn"
-              onClick={() => gptClickHandler()}
-            >
-              Generate Detailed Info
-            </button>
-            <div className="deatiledInfoContainer">
-              <p>{detailedInfo ? detailedInfo : ""}</p>
-            </div>
-          </section>
           {spaceEvent.feature_image && (
-            <img src={spaceEvent.feature_image} alt="" />
+            <img src={spaceEvent.feature_image} alt={spaceEvent.name} />
           )}
           <h3>Event Details</h3>
-          {spaceEvent.launches[0] &&
-            spaceEvent.launches.map((launch) => (
-              <LaunchDetails key={launch.id} launch={launch} />
-            ))}
+          <section className="detailedInfoContainer">
+            <p>{spaceEvent.detailedInfo}</p>
+          </section>
+          {spaceEvent.launches.map((launch) => (
+            <LaunchDetails key={launch.id} launch={launch} />
+          ))}
           <p>Programs Involved</p>
-          {spaceEvent.program[0] &&
-            spaceEvent.program.map((program) => (
-              <ProgramDetails key={program.id} program={program} />
-            ))}
+          {spaceEvent.program.map((program) => (
+            <ProgramDetails key={program.id} program={program} />
+          ))}
+
+          {NASAImages && NASAImages.length > 0 && (
+            <>
+              <h3>
+                Showing image results for:{" "}
+                <span
+                  className="keyword-span"
+                  onClick={() => setDisplayKeyWords((prev) => !prev)}
+                >
+                  {currentKeyWord}
+                  {displayKeyWords && (
+                    <div id="keyword-selector">
+                      {spaceEvent.keyWords.map((keyword, index) => (
+                        <button
+                          key={index}
+                          onClick={() => switchKeyword(keyword)}
+                        >
+                          {keyword}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </span>
+              </h3>
+              <ul>
+                {NASAImages.slice(0, 10).map((nasaImage, index) => {
+                  const hasValidLink =
+                    nasaImage.links && nasaImage.links.length > 0;
+                  const hasImageData =
+                    nasaImage.data &&
+                    nasaImage.data.some((d) => d.media_type === "image");
+                  const imageTitle = hasImageData
+                    ? nasaImage.data[0].title
+                    : "";
+
+                  return hasValidLink && hasImageData ? (
+                    <li key={index}>
+                      <img src={nasaImage.links[0].href} alt={imageTitle} />
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            </>
+          )}
         </div>
       ) : (
-        <p>Loading</p>
+        <p>Loading...</p>
       )}
     </>
   );

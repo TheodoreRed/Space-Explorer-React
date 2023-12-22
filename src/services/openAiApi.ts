@@ -6,10 +6,20 @@ const baseUrl: string =
 
 export const generateTextWithOpenAI = async (prompt: string) => {
   try {
-    const response = await axios.post(`${baseUrl}/chatGPT/generate-text`, {
-      prompt,
-    });
-    return response.data; // Assuming the server sends back the generated text as response
+    // Set the Authorization header
+    const config = {
+      headers: {
+        Authorization: `Bearer YOUR_API_KEY_HERE`,
+      },
+    };
+    const response = await axios.post(
+      `${baseUrl}/chatGPT/generate-text`,
+      {
+        prompt,
+      },
+      config
+    );
+    return response.data;
   } catch (error) {
     console.error("Error generating text with OpenAI:", error);
     throw error; // Rethrow the error for handling it in the calling component

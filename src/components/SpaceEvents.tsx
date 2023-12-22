@@ -10,7 +10,7 @@ const SpaceEvents = () => {
   useEffect(() => {
     getAllUpcomingSpaceEvents().then((res) => setSpaceEvents(res));
   }, []);
-  console.log(spaceEvents);
+
   return (
     <div className="SpaceEvents">
       <nav>
@@ -19,10 +19,20 @@ const SpaceEvents = () => {
         </div>
       </nav>
       <ul>
-        {spaceEvents &&
-          spaceEvents.map((oneEvent) => {
-            return <SingleSpaceEvent key={oneEvent.id} oneEvent={oneEvent} />;
-          })}
+        {spaceEvents ? (
+          spaceEvents
+            .filter((oneEvent) => {
+              return new Date(oneEvent.date) > new Date();
+            })
+            .sort(
+              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+            )
+            .map((oneEvent) => {
+              return <SingleSpaceEvent key={oneEvent.id} oneEvent={oneEvent} />;
+            })
+        ) : (
+          <p>TODO: A loading Gif</p>
+        )}
       </ul>
     </div>
   );
