@@ -1,5 +1,5 @@
 import SpaceEvent from "../models/SpaceEvent";
-import { getAllUpcomingSpaceEvents } from "../services/theSpaceDevsApi";
+import { getAllSpaceEvents } from "../services/theSpaceDevsApi";
 import "./SpaceEvents.css";
 import { useState, useEffect } from "react";
 import SingleSpaceEvent from "./SingleSpaceEvent";
@@ -8,7 +8,7 @@ const SpaceEvents = () => {
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[] | null>(null);
 
   useEffect(() => {
-    getAllUpcomingSpaceEvents().then((res) => setSpaceEvents(res));
+    getAllSpaceEvents().then((res) => setSpaceEvents(res));
   }, []);
 
   return (

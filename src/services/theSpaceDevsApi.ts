@@ -12,7 +12,7 @@ export const updateDatabase = async (): Promise<void> => {
   }
 };
 
-export const getAllUpcomingSpaceEvents = async (): Promise<SpaceEvent[]> => {
+export const getAllSpaceEvents = async (): Promise<SpaceEvent[]> => {
   return (await axios.get(`${baseUrl}/space-events`)).data;
 };
 

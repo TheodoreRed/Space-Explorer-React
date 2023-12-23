@@ -9,6 +9,7 @@ import SpaceImageDetails from "./components/SpaceImageDetails";
 import Planets from "./components/Planets";
 import SpaceEvents from "./components/SpaceEvents";
 import SpaceEventDetails from "./components/SpaceEventDetails";
+import PastEvents from "./components/PastEvents";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -29,6 +30,8 @@ function App() {
         <Route path="/planets" element={<Planets />} />
         <Route path="/upcoming" element={<SpaceEvents />} />
         <Route path="/upcoming/:id" element={<SpaceEventDetails />} />
+        <Route path="/past" element={<PastEvents />} />
+        <Route path="/past/:id" element={<SpaceEventDetails isPast={true} />} />
       </Routes>
     </BrowserRouter>
   );

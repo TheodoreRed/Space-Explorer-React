@@ -14,7 +14,11 @@ import { getAccountById } from "../services/accountApi";
 import NASAImage from "../models/NASAImage";
 import { getNASAImagesBySearch } from "../services/nasaApi";
 
-const SpaceEventDetails = () => {
+interface Props {
+  isPast?: boolean;
+}
+
+const SpaceEventDetails = ({ isPast }: Props) => {
   const { account, user, setAccount } = useContext(AuthContext);
   const [spaceEvent, setSpaceEvent] = useState<SpaceEvent | null>(null);
   const [currentKeyWord, setCurrentKeyWord] = useState("");
@@ -68,16 +72,23 @@ const SpaceEventDetails = () => {
       {spaceEvent ? (
         <div className="SpaceEventDetails">
           <nav>
-            <div>
-              Events/<Link to="/upcoming">Upcoming</Link>/
-              <strong>{spaceEvent.name}</strong>
-            </div>
+            {!isPast ? (
+              <div>
+                Events/<Link to="/upcoming">Upcoming</Link>/
+                <strong>{spaceEvent.name}</strong>
+              </div>
+            ) : (
+              <div>
+                Events/<Link to="/past">Past</Link>/
+                <strong>{spaceEvent.name}</strong>
+              </div>
+            )}
           </nav>
           <h2>{spaceEvent.name}</h2>
           <p>{spaceEvent.description}</p>
           <p>Event: {spaceEvent.type.name}</p>
           <p>Date: {spaceEvent.date.slice(0, 10)}</p>
-          <p>Interested: {spaceEvent.interested ?? 0}</p>
+          {!isPast && <p>Interested: {spaceEvent.interested ?? 0}</p>}
           {spaceEvent.news_url && (
             <a
               href={spaceEvent.news_url}
@@ -87,13 +98,18 @@ const SpaceEventDetails = () => {
               News URL: {spaceEvent.news_url}
             </a>
           )}
-          {account && user ? (
+          {isPast ? (
+            <button className="event-btn" id="passed-btn">
+              Event Passed
+            </button>
+          ) : account && user ? (
             <button className="event-btn" onClick={saveHandler}>
               {eventIsSaved() ? "Event Saved" : "Save"}
             </button>
           ) : (
             <button onClick={signInWithGoogle}>Login To Save</button>
           )}
+
           {spaceEvent.feature_image && (
             <img src={spaceEvent.feature_image} alt={spaceEvent.name} />
           )}

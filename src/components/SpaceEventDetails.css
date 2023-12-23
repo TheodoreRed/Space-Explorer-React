@@ -77,3 +77,7 @@
 .SpaceEventDetails .keyword-span:hover {
   color: rgb(0, 0, 211);
 }
+
+.SpaceEventDetails #passed-btn {
+  background-color: purple;
+}

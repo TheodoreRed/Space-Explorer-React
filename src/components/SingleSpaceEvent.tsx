@@ -4,9 +4,10 @@ import "./SingleSpaceEvent.css";
 
 interface Props {
   oneEvent: SpaceEvent;
+  isPast?: boolean;
 }
 
-const SingleSpaceEvent = ({ oneEvent }: Props) => {
+const SingleSpaceEvent = ({ oneEvent, isPast }: Props) => {
   return (
     <div className="SingleSpaceEvent">
       <h3>{oneEvent.name}</h3>
@@ -24,9 +25,15 @@ const SingleSpaceEvent = ({ oneEvent }: Props) => {
           />
         )}
       </div>
-      <Link to={`/upcoming/${encodeURIComponent(oneEvent._id)}`}>
-        <button>Details</button>
-      </Link>
+      {!isPast ? (
+        <Link to={`/upcoming/${encodeURIComponent(oneEvent._id)}`}>
+          <button>Details</button>
+        </Link>
+      ) : (
+        <Link to={`/past/${encodeURIComponent(oneEvent._id)}`}>
+          <button>Details</button>
+        </Link>
+      )}
     </div>
   );
 };
