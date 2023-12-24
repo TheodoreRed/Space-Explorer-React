@@ -10,6 +10,7 @@ import Planets from "./components/Planets";
 import SpaceEvents from "./components/SpaceEvents";
 import SpaceEventDetails from "./components/SpaceEventDetails";
 import PastEvents from "./components/PastEvents";
+import PlanetDetails from "./components/PlanetDetails";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/search" element={<Search />}></Route>
         <Route path="/search/images/:nasa_id" element={<SpaceImageDetails />} />
         <Route path="/planets" element={<Planets />} />
+        <Route path="/planets/:planetName" element={<PlanetDetails />} />
         <Route path="/upcoming" element={<SpaceEvents />} />
         <Route path="/upcoming/:id" element={<SpaceEventDetails />} />
         <Route path="/past" element={<PastEvents />} />

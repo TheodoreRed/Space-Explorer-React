@@ -172,6 +172,7 @@ const SpaceEventDetails = ({ isPast }: Props) => {
       ) : (
         <p>Loading...</p>
       )}
+      <Link to="/search">Search More Images and Articles</Link>
     </>
   );
 };

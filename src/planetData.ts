@@ -1,5 +1,6 @@
 import mercuryImage1 from "./assets/mercury.jpg";
-const mercury: Planet = {
+import { PlanetObj } from "./models/Planet";
+const mercury: PlanetObj = {
   name: "Mercury",
   diameter: 4879.4,
   mass: 3.3011e23,
@@ -26,4 +27,4 @@ const mercury: Planet = {
   ],
 };
 
-export const planets: Planet[] = [mercury];
+export const planets: PlanetObj[] = [mercury];

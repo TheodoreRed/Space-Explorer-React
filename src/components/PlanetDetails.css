@@ -1,0 +1,65 @@
+/* PlanetDetails.css */
+.PlanetDetails {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+.PlanetDetails .hero {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.PlanetDetails .planet-hero-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.PlanetDetails .planet-name {
+  font-size: 2.5em;
+  color: #1a5a96;
+  margin-top: 10px;
+}
+
+.PlanetDetails .stats {
+  margin-bottom: 20px;
+}
+
+.PlanetDetails .stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.PlanetDetails .stats-table th,
+.PlanetDetails .stats-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.PlanetDetails .description {
+  margin-bottom: 20px;
+}
+
+.PlanetDetails .gallery .image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.PlanetDetails .gallery img {
+  max-width: calc(33.333% - 10px);
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.PlanetDetails .known-for ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.PlanetDetails .known-for li {
+  margin-bottom: 5px;
+}

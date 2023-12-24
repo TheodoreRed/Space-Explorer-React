@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+import { PlanetObj } from "../models/Planet";
 import "./Planet.css";
 
 interface Props {
-  planet: Planet;
+  planet: PlanetObj;
 }
 
 const Planet = ({ planet }: Props) => {
@@ -10,6 +12,9 @@ const Planet = ({ planet }: Props) => {
       <h2>{planet.name}</h2>
       <p>{planet.description}</p>
       <img src={planet.images[0]} alt="" />
+      <Link to={`/planets/${encodeURIComponent(planet.name)}`}>
+        <button>Details</button>
+      </Link>
     </div>
   );
 };

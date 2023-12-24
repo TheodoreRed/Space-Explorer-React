@@ -3,7 +3,7 @@ interface AtmosphereComposition {
   percentage: number; // Percent of that gas in atmosphere
 }
 
-interface Planet {
+export interface PlanetObj {
   name: string;
   diameter: number; // in kilometers
   mass: number; // in kilograms
