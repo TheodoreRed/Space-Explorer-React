@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { planets } from "../planetData";
 import "./PlanetDetails.css";
 import { PlanetObj } from "../models/Planet";
+import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
 
 const PlanetDetails = () => {
   const planetName = useParams().planetName;
@@ -121,6 +122,7 @@ const PlanetDetails = () => {
           ))}
         </ul>
       </section>
+      <RelatedArticlesAndImages keywords={currentPlanet.keywords} />
     </div>
   );
 };

@@ -25,6 +25,13 @@ const mercury: PlanetObj = {
     "Having no moons",
     "Shortest year of all the planets in our solar system (88 days)",
   ],
+  keywords: [
+    "Mercury Planet",
+    "Messenger Mission",
+    "Mercury Geology",
+    "BepiColombo Mission",
+    "Mercury Craters",
+  ],
 };
 
 export const planets: PlanetObj[] = [mercury];

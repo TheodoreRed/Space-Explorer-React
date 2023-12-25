@@ -19,7 +19,6 @@
 }
 
 .SpaceEventDetails a {
-  color: blue;
   text-decoration: none;
 }
 
@@ -47,35 +46,6 @@
 
 .SpaceEventDetails .event-btn:hover {
   background-color: #3c528b;
-}
-
-.SpaceEventDetails #keyword-selector {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  position: absolute;
-  top: 22px;
-}
-
-.SpaceEventDetails #keyword-selector button {
-  border: none;
-  padding: 10px;
-  transition: 0.3s ease;
-}
-
-.SpaceEventDetails #keyword-selector button:hover {
-  background-color: gray;
-}
-
-.SpaceEventDetails .keyword-span {
-  position: absolute;
-  cursor: pointer;
-  color: rgb(92, 92, 255);
-  transition: 0.3s ease;
-}
-
-.SpaceEventDetails .keyword-span:hover {
-  color: rgb(0, 0, 211);
 }
 
 .SpaceEventDetails #passed-btn {

@@ -1,0 +1,28 @@
+.RelatedArticlesAndImages #keyword-selector {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: absolute;
+  top: 22px;
+}
+
+.RelatedArticlesAndImages #keyword-selector button {
+  border: none;
+  padding: 10px;
+  transition: 0.3s ease;
+}
+
+.RelatedArticlesAndImages #keyword-selector button:hover {
+  background-color: gray;
+}
+
+.RelatedArticlesAndImages .keyword-span {
+  position: absolute;
+  cursor: pointer;
+  color: rgb(92, 92, 255);
+  transition: 0.3s ease;
+}
+
+.RelatedArticlesAndImages .keyword-span:hover {
+  color: rgb(0, 0, 211);
+}

@@ -23,4 +23,5 @@ export interface PlanetObj {
   images: string[];
   composition: AtmosphereComposition[];
   knownFor: string[]; // array of interesting facts or features
+  keywords: string[];
 }

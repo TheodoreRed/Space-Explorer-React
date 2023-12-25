@@ -11,8 +11,7 @@ import ProgramDetails from "./ProgramDetails";
 import LaunchDetails from "./LaunchDetails";
 import { signInWithGoogle } from "../firebaseConfig";
 import { getAccountById } from "../services/accountApi";
-import NASAImage from "../models/NASAImage";
-import { getNASAImagesBySearch } from "../services/nasaApi";
+import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
 
 interface Props {
   isPast?: boolean;
@@ -21,9 +20,7 @@ interface Props {
 const SpaceEventDetails = ({ isPast }: Props) => {
   const { account, user, setAccount } = useContext(AuthContext);
   const [spaceEvent, setSpaceEvent] = useState<SpaceEvent | null>(null);
-  const [currentKeyWord, setCurrentKeyWord] = useState("");
-  const [NASAImages, setNASAImages] = useState<NASAImage[] | null>(null);
-  const [displayKeyWords, setDisplayKeyWords] = useState(false);
+
   const id: string | undefined = useParams().id;
 
   useEffect(() => {
@@ -31,17 +28,10 @@ const SpaceEventDetails = ({ isPast }: Props) => {
       getSpaceEventById(id).then((res) => {
         if (res) {
           setSpaceEvent(res);
-          setCurrentKeyWord(res.keyWords[0]); // Set the first keyword by default
         }
       });
     }
   }, [id]);
-
-  useEffect(() => {
-    if (currentKeyWord) {
-      getNASAImagesBySearch(currentKeyWord).then(setNASAImages);
-    }
-  }, [currentKeyWord]);
 
   const eventIsSaved = () => {
     return account?.savedEvents.some((item) => item._id === spaceEvent?._id);
@@ -63,10 +53,6 @@ const SpaceEventDetails = ({ isPast }: Props) => {
     }
   };
 
-  const switchKeyword = (keyword: string) => {
-    setCurrentKeyWord(keyword);
-  };
-
   return (
     <>
       {spaceEvent ? (
@@ -74,13 +60,19 @@ const SpaceEventDetails = ({ isPast }: Props) => {
           <nav>
             {!isPast ? (
               <div>
-                Events/<Link to="/upcoming">Upcoming</Link>/
-                <strong>{spaceEvent.name}</strong>
+                Events/
+                <Link to="/upcoming" style={{ color: "blue" }}>
+                  Upcoming
+                </Link>
+                /<strong>{spaceEvent.name}</strong>
               </div>
             ) : (
               <div>
-                Events/<Link to="/past">Past</Link>/
-                <strong>{spaceEvent.name}</strong>
+                Events/
+                <Link to="/past" style={{ color: "blue" }}>
+                  Past
+                </Link>
+                /<strong>{spaceEvent.name}</strong>
               </div>
             )}
           </nav>
@@ -125,54 +117,11 @@ const SpaceEventDetails = ({ isPast }: Props) => {
             <ProgramDetails key={program.id} program={program} />
           ))}
 
-          {NASAImages && NASAImages.length > 0 && (
-            <>
-              <h3>
-                Showing image results for:{" "}
-                <span
-                  className="keyword-span"
-                  onClick={() => setDisplayKeyWords((prev) => !prev)}
-                >
-                  {currentKeyWord}
-                  {displayKeyWords && (
-                    <div id="keyword-selector">
-                      {spaceEvent.keyWords.map((keyword, index) => (
-                        <button
-                          key={index}
-                          onClick={() => switchKeyword(keyword)}
-                        >
-                          {keyword}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </span>
-              </h3>
-              <ul>
-                {NASAImages.slice(0, 10).map((nasaImage, index) => {
-                  const hasValidLink =
-                    nasaImage.links && nasaImage.links.length > 0;
-                  const hasImageData =
-                    nasaImage.data &&
-                    nasaImage.data.some((d) => d.media_type === "image");
-                  const imageTitle = hasImageData
-                    ? nasaImage.data[0].title
-                    : "";
-
-                  return hasValidLink && hasImageData ? (
-                    <li key={index}>
-                      <img src={nasaImage.links[0].href} alt={imageTitle} />
-                    </li>
-                  ) : null;
-                })}
-              </ul>
-            </>
-          )}
+          <RelatedArticlesAndImages keywords={spaceEvent.keyWords} />
         </div>
       ) : (
         <p>Loading...</p>
       )}
-      <Link to="/search">Search More Images and Articles</Link>
     </>
   );
 };
