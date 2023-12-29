@@ -1,16 +1,8 @@
 import axios from "axios";
 import SpaceEvent from "../models/SpaceEvent";
+import { Astronaut } from "../models/Astronaut";
 
 const baseUrl: string = import.meta.env.VITE_APP_BASE_URL ?? "NOT FOUND";
-
-export const updateDatabase = async (): Promise<void> => {
-  try {
-    const response = await axios.get(`${baseUrl}/space-events/trigger-update`);
-    console.log(response.data); // Or handle the response as needed
-  } catch (error) {
-    console.error("Error updating database:", error);
-  }
-};
 
 export const getAllSpaceEvents = async (): Promise<SpaceEvent[]> => {
   return (await axios.get(`${baseUrl}/space-events`)).data;
@@ -31,4 +23,14 @@ export const toggleSpaceEventInterest = async (
       eventId
     )}/toggle-interest/${encodeURIComponent(userId)}`
   );
+};
+
+export const getAllAstronauts = async (): Promise<Astronaut[]> => {
+  const response = await axios.get(`${baseUrl}/astronauts`);
+  return response.data;
+};
+
+export const getAstronautById = async (id: string): Promise<Astronaut> => {
+  return (await axios.get(`${baseUrl}/astronauts/${encodeURIComponent(id)}`))
+    .data;
 };

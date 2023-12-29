@@ -1,0 +1,62 @@
+.Astronauts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Astronauts nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.Astronauts nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.Astronauts .naut-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #bababa;
+  padding: 15px 0;
+}
+
+.Astronauts .left-side {
+  width: 33%;
+  margin: 10px;
+}
+
+.Astronauts .left-side img {
+  border-radius: 5px;
+  width: 33vw;
+}
+
+.Astronauts .right-side {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  width: 66vw;
+}
+
+.Astronauts .right-side p {
+  width: 100%;
+}
+
+.Astronauts button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.Astronauts button:hover {
+  background-color: #45a049;
+}

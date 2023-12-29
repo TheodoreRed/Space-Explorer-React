@@ -7,7 +7,7 @@ const Planets = () => {
     <div className="Planets">
       <nav>
         <div>
-          Events/<strong>Planets</strong>
+          Learn/<strong>Planets</strong>
         </div>
       </nav>
       {planets.map((planet) => (
