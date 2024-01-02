@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px;
 }
 
 .Astronauts nav div {
@@ -14,7 +15,7 @@
 .Astronauts nav {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .Astronauts .naut-container {
@@ -31,7 +32,7 @@
 
 .Astronauts .left-side img {
   border-radius: 5px;
-  width: 33vw;
+  width: 30vw;
 }
 
 .Astronauts .right-side {
@@ -59,4 +60,61 @@
 
 .Astronauts button:hover {
   background-color: #45a049;
+}
+
+.Astronauts .filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.Astronauts .filter-container > * {
+  margin-bottom: 10px; /* Space between filter inputs */
+  width: 100%; /* Control width of filter inputs */
+}
+
+.Astronauts .filter-container input,
+.Astronauts .filter-container select,
+.Astronauts .in-space-div,
+.Astronauts .age-range-container,
+.Astronauts .most-time-in-space-div {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 90%;
+}
+
+.Astronauts .filter-container button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Astronauts .filter-container button:hover {
+  background-color: #2980b9;
+}
+
+.Astronauts .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.Astronauts .in-space-div,
+.Astronauts .most-time-in-space-div {
+  background-color: #85cc70;
+  cursor: pointer;
+  text-align: center;
+}
+
+.Astronauts .in-space-div:hover {
+  background-color: #72b162;
+}
+
+.Astronauts .age-range-container {
+  display: flex;
+  width: 90%;
 }

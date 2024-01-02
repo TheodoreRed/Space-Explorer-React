@@ -1,0 +1,30 @@
+.AstronautDetails nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.AstronautDetails nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.AstronautDetails .nav-a {
+  text-decoration: none;
+  color: blue;
+}
+
+.AstronautDetails a:hover {
+  text-decoration: underline;
+}
+
+.AstronautDetails img {
+  width: 100vw;
+}
+
+.AstronautDetails .details-name {
+  text-align: center;
+}

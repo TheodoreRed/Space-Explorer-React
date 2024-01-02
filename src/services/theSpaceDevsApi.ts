@@ -1,6 +1,7 @@
 import axios from "axios";
 import SpaceEvent from "../models/SpaceEvent";
 import { Astronaut } from "../models/Astronaut";
+import Spacecraft from "../models/Spacecraft";
 
 const baseUrl: string = import.meta.env.VITE_APP_BASE_URL ?? "NOT FOUND";
 
@@ -33,4 +34,9 @@ export const getAllAstronauts = async (): Promise<Astronaut[]> => {
 export const getAstronautById = async (id: string): Promise<Astronaut> => {
   return (await axios.get(`${baseUrl}/astronauts/${encodeURIComponent(id)}`))
     .data;
+};
+
+export const getAllSpacecrafts = async (): Promise<Spacecraft[]> => {
+  const response = await axios.get(`${baseUrl}/spacecrafts`);
+  return response.data;
 };
