@@ -34,7 +34,7 @@ const SpaceEventDetails = ({ isPast }: Props) => {
   }, [id]);
 
   const eventIsSaved = () => {
-    return account?.savedEvents.some((item) => item._id === spaceEvent?._id);
+    return account?.savedEvents.some((item) => item === spaceEvent?._id);
   };
 
   const saveHandler = async () => {
@@ -80,7 +80,7 @@ const SpaceEventDetails = ({ isPast }: Props) => {
           <p>{spaceEvent.description}</p>
           <p>Event: {spaceEvent.type.name}</p>
           <p>Date: {spaceEvent.date.slice(0, 10)}</p>
-          {!isPast && <p>Interested: {spaceEvent.interested ?? 0}</p>}
+          <p>Interested: {spaceEvent.interested ?? 0}</p>
           {spaceEvent.news_url && (
             <a
               href={spaceEvent.news_url}
@@ -90,16 +90,22 @@ const SpaceEventDetails = ({ isPast }: Props) => {
               News URL: {spaceEvent.news_url}
             </a>
           )}
-          {isPast ? (
-            <button className="event-btn" id="passed-btn">
-              Event Passed
+          {isPast && account && user ? (
+            <button className="event-btn" id="passed-btn" onClick={saveHandler}>
+              {eventIsSaved() ? "Saved" : "Save Past Event"}
             </button>
           ) : account && user ? (
             <button className="event-btn" onClick={saveHandler}>
               {eventIsSaved() ? "Event Saved" : "Save"}
             </button>
           ) : (
-            <button onClick={signInWithGoogle}>Login To Save</button>
+            <button
+              style={{ backgroundColor: "purple" }}
+              className="event-btn"
+              onClick={signInWithGoogle}
+            >
+              Login To Save
+            </button>
           )}
 
           {spaceEvent.feature_image && (

@@ -11,7 +11,10 @@ const Planet = ({ planet }: Props) => {
     <div className="Planet">
       <h2>{planet.name}</h2>
       <p>{planet.description}</p>
-      <img src={planet.images[0]} alt="" />
+      <img
+        src={planet.images[Math.floor(Math.random() * planet.images.length)]}
+        alt=""
+      />
       <Link to={`/planets/${encodeURIComponent(planet.name)}`}>
         <button>Details</button>
       </Link>

@@ -63,3 +63,25 @@
 .PlanetDetails .known-for li {
   margin-bottom: 5px;
 }
+
+.PlanetDetails nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.PlanetDetails nav {
+  display: flex;
+  justify-content: center;
+}
+
+.PlanetDetails .nav-a {
+  text-decoration: none;
+  color: blue;
+}
+
+.PlanetDetails a:hover {
+  text-decoration: underline;
+}

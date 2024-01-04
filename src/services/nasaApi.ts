@@ -15,8 +15,11 @@ export const getAstronomyPictureOfTheDay =
 export const getNASAImagesBySearch = async (
   search: string
 ): Promise<NASAImage[]> => {
-  return (await axios.get(`https://images-api.nasa.gov/search?q=${search}`))
-    .data.collection.items;
+  let nasaImages: NASAImage[] = (
+    await axios.get(`https://images-api.nasa.gov/search?q=${search}`)
+  ).data.collection.items;
+  nasaImages = nasaImages.filter((obj) => obj.data[0].media_type === "image");
+  return nasaImages;
 };
 
 export const getNASAImagesById = async (id: string): Promise<NASAImage> => {

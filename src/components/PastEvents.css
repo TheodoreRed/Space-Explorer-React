@@ -1,0 +1,91 @@
+.PastEvents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.PastEvents nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.PastEvents nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.PastEvents .filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.PastEvents .filter-container > * {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.PastEvents .filter-container input,
+.PastEvents .saved-events-div,
+.PastEvents .year-range-container {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 90%;
+}
+
+.PastEvents .filter-container button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.PastEvents .filter-container button:hover {
+  background-color: #2980b9;
+}
+
+.PastEvents span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+}
+
+.PastEvents .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.PastEvents .saved-events-div {
+  background-color: #85cc70;
+  cursor: pointer;
+  text-align: center;
+}
+
+.PastEvents .saved-events-div:hover {
+  background-color: #72b162;
+}
+
+.PastEvents .year-range-container {
+  display: flex;
+  width: 90%;
+}
+
+.PastEvents .load-more-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.PastEvents .load-more-btn:hover {
+  background-color: #45a049;
+}

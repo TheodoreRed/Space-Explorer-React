@@ -17,7 +17,8 @@ const RelatedArticlesAndImages = ({ keywords }: Props) => {
     null
   );
   const [currentKeyWord, setCurrentKeyWord] = useState<string>(keywords[0]);
-  const [showRelatedArticles, setShowRelatedArticles] = useState<boolean>(true);
+  const [showRelatedArticles, setShowRelatedArticles] =
+    useState<boolean>(false);
   const [displayKeyWords, setDisplayKeyWords] = useState<boolean>(false);
 
   useEffect(() => {

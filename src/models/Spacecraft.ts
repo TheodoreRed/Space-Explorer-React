@@ -26,7 +26,10 @@ interface SpacecraftConfig {
 }
 
 export default interface Spacecraft {
+  _id: string;
   id: number;
+  in_space: boolean;
+  time_in_space: string;
   url: string;
   name: string;
   serial_number: string | null;

@@ -1,11 +1,91 @@
+.SpaceEvents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
 .SpaceEvents nav div {
   background-color: #a7c3f0;
   padding: 10px;
   border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .SpaceEvents nav {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.SpaceEvents .filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.SpaceEvents .filter-container > * {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.SpaceEvents .filter-container input,
+.SpaceEvents .saved-events-div,
+.SpaceEvents .year-range-container {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 90%;
+}
+
+.SpaceEvents .filter-container button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.SpaceEvents .filter-container button:hover {
+  background-color: #2980b9;
+}
+
+.SpaceEvents span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+}
+
+.SpaceEvents .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.SpaceEvents .saved-events-div {
+  background-color: #85cc70;
+  cursor: pointer;
+  text-align: center;
+}
+
+.SpaceEvents .saved-events-div:hover {
+  background-color: #72b162;
+}
+
+.SpaceEvents .year-range-container {
+  display: flex;
+  width: 90%;
+}
+
+.SpaceEvents .load-more-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.SpaceEvents .load-more-btn:hover {
+  background-color: #45a049;
 }

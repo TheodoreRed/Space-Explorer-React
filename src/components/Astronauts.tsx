@@ -5,6 +5,25 @@ import { Astronaut } from "../models/Astronaut";
 import { Link } from "react-router-dom";
 import backup_img_one from "../assets/backup-astronaut.png";
 
+export const durationToSeconds = (duration: string) => {
+  // Initialize total seconds to 0
+  let totalSeconds = 0;
+
+  // Extract days, hours, minutes, and seconds using regular expressions
+  const days = duration.match(/(\d+)D/)?.[1] || "0"; // Find days
+  const hours = duration.match(/(\d+)H/)?.[1] || "0"; // Find hours
+  const minutes = duration.match(/(\d+)M/)?.[1] || "0"; // Find minutes
+  const seconds = duration.match(/(\d+)S/)?.[1] || "0"; // Find seconds
+
+  // Convert each component to seconds and add to total
+  totalSeconds += parseInt(seconds); // Add seconds
+  totalSeconds += parseInt(minutes) * 60; // Convert minutes to seconds and add
+  totalSeconds += parseInt(hours) * 3600; // Convert hours to seconds and add
+  totalSeconds += parseInt(days) * 86400; // Convert days to seconds and add
+
+  return totalSeconds;
+};
+
 const Astronauts = () => {
   const [allAstronauts, setAllAstronauts] = useState<Astronaut[] | null>(null);
   const [visibleCount, setVisibleCount] = useState(10); // Show 10 astronauts initially
@@ -26,25 +45,6 @@ const Astronauts = () => {
     setVisibleCount((prevCount) => prevCount + 10); // Load 10 more astronauts
   };
 
-  function durationToSeconds(duration: string) {
-    // Initialize total seconds to 0
-    let totalSeconds = 0;
-
-    // Extract days, hours, minutes, and seconds using regular expressions
-    const days = duration.match(/(\d+)D/)?.[1] || "0"; // Find days
-    const hours = duration.match(/(\d+)H/)?.[1] || "0"; // Find hours
-    const minutes = duration.match(/(\d+)M/)?.[1] || "0"; // Find minutes
-    const seconds = duration.match(/(\d+)S/)?.[1] || "0"; // Find seconds
-
-    // Convert each component to seconds and add to total
-    totalSeconds += parseInt(seconds); // Add seconds
-    totalSeconds += parseInt(minutes) * 60; // Convert minutes to seconds and add
-    totalSeconds += parseInt(hours) * 3600; // Convert hours to seconds and add
-    totalSeconds += parseInt(days) * 86400; // Convert days to seconds and add
-
-    return totalSeconds;
-  }
-
   const filterAstronauts = (astronauts: Astronaut[]) => {
     let filteredAstronauts = [...astronauts];
     if (filterName) {
@@ -61,13 +61,14 @@ const Astronauts = () => {
       filteredAstronauts = filteredAstronauts.filter((naut) => naut.in_space);
     }
 
-    if (filterMinAge || filterMaxAge) {
-      if (!filterMinAge) {
-        setFilterMinAge("0");
-      }
+    if (filterMinAge) {
       filteredAstronauts = filteredAstronauts.filter(
-        (naut) =>
-          naut.age && naut.age >= +filterMinAge && naut.age <= +filterMaxAge
+        (naut) => naut.age && naut.age >= +filterMinAge
+      );
+    }
+    if (filterMaxAge) {
+      filteredAstronauts = filteredAstronauts.filter(
+        (naut) => naut.age && naut.age <= +filterMaxAge
       );
     }
     if (filterMostTimeInSpace) {

@@ -1,5 +1,5 @@
 // PlanetDetails.tsx
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { planets } from "../planetData";
 import "./PlanetDetails.css";
@@ -25,10 +25,23 @@ const PlanetDetails = () => {
 
   return (
     <div className="PlanetDetails">
+      <nav>
+        <div>
+          Learn/
+          <Link className="nav-a" to="/planets">
+            Planets
+          </Link>
+          /<strong>{currentPlanet.name}</strong>
+        </div>
+      </nav>
       <section className="hero">
         {currentPlanet.images?.[0] && (
           <img
-            src={currentPlanet.images[0]}
+            src={
+              currentPlanet.images[
+                Math.floor(Math.random() * currentPlanet.images.length)
+              ]
+            }
             alt={`Image of ${currentPlanet.name}`}
             className="planet-hero-image"
           />
@@ -99,19 +112,6 @@ const PlanetDetails = () => {
       <section className="description">
         <h2>Description</h2>
         <p>{currentPlanet.description}</p>
-      </section>
-
-      <section className="gallery">
-        <h2>Image Gallery</h2>
-        <div className="image-gallery">
-          {currentPlanet.images?.slice(1).map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Image of ${currentPlanet.name}`}
-            />
-          ))}
-        </div>
       </section>
 
       <section className="known-for">
