@@ -43,7 +43,7 @@ const Header = () => {
             }`}
             onClick={() => setShowProfileNav(false)}
           >
-            {user && <Link to="/profile">Profile</Link>}
+            {user && <Link to="/me">Profile</Link>}
             <Link to="/">Home</Link>
 
             <button className="signOutBtn" onClick={signOut}>

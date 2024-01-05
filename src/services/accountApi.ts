@@ -1,5 +1,5 @@
 import axios from "axios";
-import Account from "../models/Account";
+import Account, { UserComment } from "../models/Account";
 import SpaceArticle from "../models/SpaceArticle";
 import NASAImage from "../models/NASAImage";
 
@@ -52,4 +52,34 @@ export const toggleSpaceImageInterest = async (
     `${baseUrl}/accounts/${encodeURIComponent(userId)}/toggle-image`,
     image
   );
+};
+
+// Add a comment to an account
+export const addCommentToAccount = async (
+  accountId: string,
+  comment: UserComment
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/accounts/${encodeURIComponent(accountId)}/add-comment`,
+      comment
+    );
+  } catch (err) {
+    console.error("Error adding comment to account:", err);
+  }
+};
+
+// Function to delete a comment from an account
+export const deleteCommentFromAccount = async (
+  accountId: string,
+  commentUuid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/accounts/${encodeURIComponent(accountId)}/delete-comment`,
+      { uuid: commentUuid }
+    );
+  } catch (err) {
+    console.error("Error deleting comment from account:", err);
+  }
 };

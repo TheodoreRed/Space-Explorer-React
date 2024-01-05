@@ -14,6 +14,7 @@ import PlanetDetails from "./components/PlanetDetails";
 import Astronauts from "./components/Astronauts";
 import AstronautDetails from "./components/AstronautDetails";
 import Spacecrafts from "./components/Spacecrafts";
+import Profile from "./components/Profile";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -29,6 +30,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/me" element={<Profile />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/search/images/:nasa_id" element={<SpaceImageDetails />} />
         <Route path="/planets" element={<Planets />} />

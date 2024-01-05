@@ -1,0 +1,115 @@
+.Profile {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.Profile h2 {
+  text-decoration: 1px underline;
+  text-align: center;
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+.Profile h3 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.Profile .account-info {
+  background-color: rgb(208, 236, 238);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 5px inset black;
+}
+.Profile .left {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px;
+}
+
+.Profile .left .info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Profile .left .info-label {
+  font-weight: bold;
+}
+
+.Profile .left .name {
+  font-size: 2rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Profile .right img {
+  height: 150px;
+}
+
+.Profile .comments {
+  background-color: #90ee90;
+  border: 1px solid black;
+  padding: 20px;
+  position: relative;
+}
+
+.Profile .comment-li {
+  border-bottom: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.Profile .load-more-comments-btn {
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  width: 80%;
+  height: 30px;
+  border-radius: 100px;
+  border: none;
+  background-color: rgb(208, 236, 238);
+  transform: translateX(-50%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.Profile h3 span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
+.Profile .saved-items-h3 {
+  border-top: 1px solid black;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.Profile .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.Profile .dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.8rem;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.Profile .dropdown-li {
+  padding: 10px;
+  border: 1px solid black;
+  width: 25%;
+  background-color: #ffffe0;
+  cursor: pointer;
+}

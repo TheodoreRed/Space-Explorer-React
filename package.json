@@ -22,12 +22,14 @@
     "openai": "4.22.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.20.1"
+    "react-router-dom": "6.20.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/file-saver": "2.0.7",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
     "@vitejs/plugin-react": "4.2.0",

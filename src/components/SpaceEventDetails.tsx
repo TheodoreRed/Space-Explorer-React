@@ -12,6 +12,7 @@ import LaunchDetails from "./LaunchDetails";
 import { signInWithGoogle } from "../firebaseConfig";
 import { getAccountById } from "../services/accountApi";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
+import CommentSection from "./CommentSection";
 
 interface Props {
   isPast?: boolean;
@@ -122,7 +123,10 @@ const SpaceEventDetails = ({ isPast }: Props) => {
           {spaceEvent.program.map((program) => (
             <ProgramDetails key={program.id} program={program} />
           ))}
-
+          <CommentSection
+            spaceEvent={spaceEvent}
+            setSpaceEvent={setSpaceEvent}
+          />
           <RelatedArticlesAndImages keywords={spaceEvent.keyWords} />
         </div>
       ) : (

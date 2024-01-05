@@ -2,6 +2,7 @@ import axios from "axios";
 import SpaceEvent from "../models/SpaceEvent";
 import { Astronaut } from "../models/Astronaut";
 import Spacecraft from "../models/Spacecraft";
+import { UserComment } from "../models/Account";
 
 const baseUrl: string = import.meta.env.VITE_APP_BASE_URL ?? "NOT FOUND";
 
@@ -39,4 +40,34 @@ export const getAstronautById = async (id: string): Promise<Astronaut> => {
 export const getAllSpacecrafts = async (): Promise<Spacecraft[]> => {
   const response = await axios.get(`${baseUrl}/spacecrafts`);
   return response.data;
+};
+
+// Add a comment to a space event
+export const addCommentToSpaceEvent = async (
+  eventId: string,
+  comment: UserComment
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(eventId)}/add-comment`,
+      comment
+    );
+  } catch (err) {
+    console.error("Error adding comment to space event:", err);
+  }
+};
+
+// Delete a comment from a space event
+export const deleteCommentFromSpaceEvent = async (
+  eventId: string,
+  commentUuid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(eventId)}/delete-comment`,
+      { uuid: commentUuid }
+    );
+  } catch (err) {
+    console.error("Error deleting comment from space event:", err);
+  }
 };
