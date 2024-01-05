@@ -1,13 +1,45 @@
+import { useContext } from "react";
 import SpaceArticle from "../models/SpaceArticle";
 import "./SingleSpaceArticle.css";
+import AuthContext from "../context/AuthContext";
+import {
+  getAccountById,
+  toggleSpaceArticleInterest,
+} from "../services/accountApi";
 
 interface Props {
   spaceArticle: SpaceArticle;
 }
 
 const SingleSpaceArticle = ({ spaceArticle }: Props) => {
+  const { account, setAccount } = useContext(AuthContext);
+
+  const isSaved = (): boolean => {
+    if (account) {
+      return account?.savedArticles.some((x) => x.id === spaceArticle.id);
+    } else return false;
+  };
+
+  const handleSaveArticleBtn = async () => {
+    if (account && account.uid) {
+      await toggleSpaceArticleInterest(spaceArticle, account._id!);
+      let temp = await getAccountById(account.uid);
+      if (temp) {
+        setAccount(temp);
+      }
+    }
+  };
+
   return (
-    <li className="SpaceArticle">
+    <li className="SingleSpaceArticle">
+      {account && (
+        <button
+          className={`save-btn ${isSaved() ? "saved" : ""}`}
+          onClick={() => handleSaveArticleBtn()}
+        >
+          {isSaved() ? "Saved" : "Save"}
+        </button>
+      )}
       <h3>{spaceArticle.title}</h3>
       <p>{spaceArticle.summary}</p>
       {spaceArticle.image_url && (

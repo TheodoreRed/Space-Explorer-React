@@ -24,6 +24,7 @@ const Search = () => {
 
     if (searchNasaApi) {
       setSpaceArticles(null);
+
       getNASAImagesBySearch(searchText).then((res) => {
         console.log(res);
         if (res) {
@@ -33,6 +34,7 @@ const Search = () => {
       });
     } else {
       setNASAImages(null);
+
       getAllArticles(searchText).then((res) => {
         if (res) {
           setSpaceArticles(res);

@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { saveAs } from "file-saver";
 import { getNASAImagesById } from "../services/nasaApi";
 import NASAImage from "../models/NASAImage";
 import "./SpaceImageDetails.css";
 import { downloadImage } from "../services/downloadApi";
+import AuthContext from "../context/AuthContext";
+import {
+  getAccountById,
+  toggleSpaceImageInterest,
+} from "../services/accountApi";
 
 const SpaceImageDetails = () => {
+  const { account, setAccount } = useContext(AuthContext);
   const [image, setImage] = useState<NASAImage | null>(null);
   const { nasa_id } = useParams();
 
@@ -37,8 +43,34 @@ const SpaceImageDetails = () => {
     }
   };
 
+  const isSaved = (): boolean => {
+    if (account && image) {
+      return account.savedImages.some(
+        (x) => x.data[0].nasa_id === image.data[0].nasa_id
+      );
+    } else return false;
+  };
+
+  const handleSaveImageBtn = async () => {
+    if (account && account.uid && image) {
+      await toggleSpaceImageInterest(image, account._id!);
+      let temp = await getAccountById(account.uid);
+      if (temp) {
+        setAccount(temp);
+      }
+    }
+  };
+
   return (
     <div className="SpaceImageDetails">
+      {account && (
+        <button
+          className={`save-btn ${isSaved() ? "saved" : ""}`}
+          onClick={() => handleSaveImageBtn()}
+        >
+          {isSaved() ? "Saved" : "Save"}
+        </button>
+      )}
       <h3>{title}</h3>
       <p>{description}</p>
       <p>{dateCreated && `Date Created: ${formatDate(dateCreated)}`}</p>

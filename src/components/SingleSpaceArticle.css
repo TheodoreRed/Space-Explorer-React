@@ -1,4 +1,4 @@
-.SpaceArticle {
+.SingleSpaceArticle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,16 +8,21 @@
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  position: relative;
 }
 
-.SpaceArticle p {
+.SingleSpaceArticle h3 {
+  padding: 20px 30px;
+}
+
+.SingleSpaceArticle p {
   margin: 5px 0;
   font-size: 18px;
   color: #333;
   text-align: center;
 }
 
-.SpaceArticle img {
+.SingleSpaceArticle img {
   width: 90%;
   max-width: 400px;
   height: auto;
@@ -26,7 +31,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.SpaceArticle a {
+.SingleSpaceArticle a {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -37,6 +42,23 @@
   transition: background-color 0.3s ease;
 }
 
-.SpaceArticle a:hover {
+.SingleSpaceArticle a:hover {
   background-color: #0056b3;
+}
+
+.SingleSpaceArticle .save-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  background-color: #4a4a4a;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 5px 0 5px 0px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.SingleSpaceArticle .save-btn:hover {
+  background-color: #383838;
 }
