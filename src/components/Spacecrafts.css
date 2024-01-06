@@ -53,6 +53,12 @@
   background-color: #2980b9;
 }
 
+.Spacecrafts button span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
 .Spacecrafts .flipUpsideDown {
   transform: rotate(-180deg);
 }

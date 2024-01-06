@@ -98,6 +98,12 @@
   background-color: #2980b9;
 }
 
+.Astronauts button span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
 .Astronauts .flipUpsideDown {
   transform: rotate(-180deg);
 }

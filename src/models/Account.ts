@@ -4,23 +4,25 @@ import NASAImage from "./NASAImage";
 interface UserCommentReply {
   uid: string;
   eventId: string;
+  eventDate: string;
   parentId: string;
   content: string;
   createdAt: Date;
-  likes: number;
+  likes: string[];
   uuid: string;
-  displayName: string;
+  uniqueName: string;
   photoURL: string;
 }
 
 export interface UserComment {
   uid: string;
   eventId: string;
+  eventDate: string;
   content: string;
-  displayName: string;
+  uniqueName: string;
   photoURL: string;
   createdAt: Date;
-  likes: number;
+  likes: string[];
   replies: UserCommentReply[]; // Array of replies to the comment
   uuid: string;
 }
@@ -31,7 +33,7 @@ export default interface Account {
   displayName: string;
   photoURL: string;
   email: string;
-  uniqueName?: string;
+  uniqueName: string;
   darkMode: boolean;
   savedEvents: string[];
   savedArticles: SpaceArticle[];

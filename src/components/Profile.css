@@ -47,6 +47,7 @@
   font-size: 2rem;
   padding: 10px;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 .Profile .right img {
@@ -77,6 +78,11 @@
   background-color: rgb(208, 236, 238);
   transform: translateX(-50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+.Profile .load-more-comments-btn:hover {
+  background-color: rgb(185, 230, 235);
 }
 
 .Profile h3 span {
@@ -112,4 +118,17 @@
   width: 25%;
   background-color: #ffffe0;
   cursor: pointer;
+}
+
+.Profile #new-name {
+  padding: 5px;
+}
+
+.Profile .new-name-form {
+  position: relative;
+}
+
+.Profile .new-name-form button {
+  background-color: transparent;
+  border: none;
 }

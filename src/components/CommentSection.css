@@ -1,3 +1,155 @@
 .CommentSection {
   margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentSection .space-event-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CommentSection .space-event-li {
+  background-color: white;
+  border-top: 2px solid black;
+  padding-top: 20px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.CommentSection .space-event-li img {
+  border-radius: 50%;
+  background-color: black;
+  width: 25%;
+  margin: 20px;
+}
+
+.CommentSection .comment-info {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentSection .comment-info .comment-author {
+  font-weight: 700;
+  padding: 15px;
+}
+
+.CommentSection .comment-info .comment-content {
+  margin: 0px 30px 50px 0px;
+  padding: 15px;
+}
+
+.CommentSection .comment-like {
+  border: none;
+  background-color: #3eaaf1;
+  color: white;
+  width: fit-content;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  letter-spacing: 0.6px;
+}
+
+.CommentSection .comment-like:hover {
+  background-color: #2879af;
+}
+
+.CommentSection .comment-like-span {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-right: 15px;
+}
+
+.CommentSection .delete-comment-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: none;
+  background-color: rgb(139, 26, 26);
+  color: white;
+  transition: 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 0 0 0 10px;
+}
+
+.CommentSection .delete-comment-btn:hover {
+  background-color: red;
+  color: black;
+}
+
+.CommentSection .filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.CommentSection button span {
+  display: inline-block;
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
+.CommentSection .filter-container > * {
+  margin-bottom: 10px; /* Space between filter inputs */
+  width: 100%; /* Control width of filter inputs */
+}
+
+.CommentSection .filter-container input,
+.CommentSection .filter-btn {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 90%;
+}
+
+.CommentSection .filter-container button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.CommentSection .filter-container button:hover {
+  background-color: #2980b9;
+}
+
+.CommentSection .flipUpsideDown {
+  transform: rotate(-180deg);
+}
+
+.CommentSection .filter-btn {
+  background-color: #85cc70;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.CommentSection .filter-btn:hover {
+  background-color: #72b162;
+}
+
+.CommentSection .load-more-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.CommentSection .load-more-btn:hover {
+  background-color: #45a049;
 }

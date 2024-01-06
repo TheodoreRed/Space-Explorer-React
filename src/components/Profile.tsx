@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
@@ -7,15 +7,25 @@ import SpaceEvent from "../models/SpaceEvent";
 import SingleSpaceEvent from "./SingleSpaceEvent";
 import SingleSpaceArticle from "./SingleSpaceArticle";
 import SpaceImage from "./SpaceImage";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPencil,
+  faSquareCheck,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
+import { updateAccountById } from "../services/accountApi";
 
 const Profile = () => {
-  const { account, user } = useContext(AuthContext);
+  const { account, user, setAccount } = useContext(AuthContext);
   const [visibleCommentCount, setVisibleCommentCount] = useState(4);
   const [showDropDown, setShowDropDown] = useState(false);
   const [dropDownChoice, setDropDownChoice] = useState("Saved Events");
   const [savedEventsDetails, setSavedEventsDetails] = useState<SpaceEvent[]>(
     []
   );
+  const [newName, setNewName] = useState(account?.uniqueName ?? "");
+  const [showNewNameForm, setShowNewNameForm] = useState(false);
 
   useEffect(() => {
     if (account) {
@@ -30,16 +40,37 @@ const Profile = () => {
     }
   }, [account?.savedEvents]);
 
-  if (!account) {
+  if (!account || !user) {
     return (
-      <button onClick={() => signInWithGoogle()}>
-        Sign In To Make Profile
-      </button>
+      <button onClick={() => signInWithGoogle()}>Sign In To See Profile</button>
     );
   }
 
   const loadMoreComments = () => {
-    setVisibleCommentCount((prevCount) => prevCount + 10); // Load 10 more astronauts
+    setVisibleCommentCount((prevCount) => prevCount + 5); // Load 5 more comments
+  };
+
+  const isSpaceEventUpcoming = (theDate: string) => {
+    if (new Date(theDate).getTime() > new Date().getTime()) {
+      return true;
+    } else return false;
+  };
+
+  const handleUpdateName = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(newName);
+    const updatedAccount = { ...account };
+    updatedAccount.uniqueName = newName;
+    if (account && account._id) {
+      updateAccountById(account._id, updatedAccount).then((res) => {
+        if (res) {
+          setAccount(res);
+        }
+      });
+    }
+    account._id;
+
+    setShowNewNameForm(false);
   };
 
   const blankLinesCount = Math.max(4 - account.comments.length, 0);
@@ -60,9 +91,65 @@ const Profile = () => {
           >
             Display Name
           </p>
-          <p className="name">
-            {account?.uniqueName === "" ? "TedRed906" : account?.uniqueName}
-          </p>
+
+          <div className="name">
+            {!showNewNameForm ? (
+              <>
+                {account?.uniqueName === ""
+                  ? account.displayName.split(" ")[0] + "123"
+                  : account?.uniqueName}
+                <FontAwesomeIcon
+                  icon={faPencil}
+                  style={{
+                    fontSize: "1rem",
+                    position: "relative",
+                    bottom: "10px",
+                    left: "4px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    setNewName(account.uniqueName ?? "");
+                    setShowNewNameForm(true);
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <form className="new-name-form" onSubmit={handleUpdateName}>
+                  {account.uniqueName !== newName && (
+                    <button type="submit" className="submit-button">
+                      <FontAwesomeIcon
+                        icon={faSquareCheck}
+                        style={{
+                          fontSize: "1.2rem",
+                          cursor: "pointer",
+                          color: "green",
+                        }}
+                      />
+                    </button>
+                  )}
+                  <label htmlFor="new-name"></label>
+                  <input
+                    type="text"
+                    id="new-name"
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faX}
+                    style={{
+                      fontSize: "1rem",
+                      position: "relative",
+                      bottom: "0px",
+                      left: "4px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setShowNewNameForm(false)}
+                  />
+                </form>
+              </>
+            )}
+          </div>
           <div className="info-item">
             <span className="info-label">Saved Events:</span>
             <span className="info-value">{account.savedEvents.length}</span>
@@ -78,7 +165,7 @@ const Profile = () => {
         </div>
         <div className="right">
           <img
-            src={`https://robohash.org/${user?.displayName}?set=set1`}
+            src={`https://robohash.org/${account.uniqueName}?set=set1`}
             alt="robohash.org photo"
           />
         </div>
@@ -88,9 +175,19 @@ const Profile = () => {
         <ul className="comment-ul">
           {account.comments.slice(0, visibleCommentCount).map((comment) => (
             <li className="comment-li" key={comment.uuid}>
-              {comment.content.length > 30
-                ? `${comment.content.slice(0, 30)}...`
-                : comment.content}
+              {isSpaceEventUpcoming(comment.eventDate) ? (
+                <Link to={`/upcoming/${encodeURIComponent(comment.eventId)}`}>
+                  {comment.content.length > 30
+                    ? `${comment.content.slice(0, 30)}...`
+                    : comment.content}
+                </Link>
+              ) : (
+                <Link to={`/past/${encodeURIComponent(comment.eventId)}`}>
+                  {comment.content.length > 30
+                    ? `${comment.content.slice(0, 30)}...`
+                    : comment.content}
+                </Link>
+              )}
             </li>
           ))}
           {blankLines.map((_, index) => (

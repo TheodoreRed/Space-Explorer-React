@@ -71,3 +71,21 @@ export const deleteCommentFromSpaceEvent = async (
     console.error("Error deleting comment from space event:", err);
   }
 };
+
+// Toggle like status of a comment in a space event
+export const toggleLikeOnComment = async (
+  eventId: string,
+  userId: string,
+  commentUuid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(
+        eventId
+      )}/toggle-like-comment/${encodeURIComponent(userId)}`,
+      { uuid: commentUuid }
+    );
+  } catch (err) {
+    console.error("Error toggling like on comment:", err);
+  }
+};

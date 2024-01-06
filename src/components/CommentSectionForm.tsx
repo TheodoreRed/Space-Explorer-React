@@ -28,12 +28,13 @@ const CommentSectionForm = ({ spaceEvent, setSpaceEvent }: Props) => {
     if (account) {
       const newComment: UserComment = {
         uid: account.uid,
-        eventId: spaceEvent.id.toString(),
+        eventId: spaceEvent._id,
+        eventDate: spaceEvent.date,
         content: comment,
-        displayName: account.displayName,
+        uniqueName: account.uniqueName,
         photoURL: account.photoURL,
         createdAt: new Date(),
-        likes: 0,
+        likes: [],
         replies: [],
         uuid: uuidv4(),
       };
