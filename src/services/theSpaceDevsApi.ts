@@ -42,6 +42,11 @@ export const getAllSpacecrafts = async (): Promise<Spacecraft[]> => {
   return response.data;
 };
 
+export const getSpacecraftById = async (id: string): Promise<Spacecraft> => {
+  return (await axios.get(`${baseUrl}/spacecrafts/${encodeURIComponent(id)}`))
+    .data;
+};
+
 // Add a comment to a space event
 export const addCommentToSpaceEvent = async (
   eventId: string,

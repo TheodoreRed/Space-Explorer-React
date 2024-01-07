@@ -1,0 +1,30 @@
+/* KeywordSelector.css */
+.KeywordSelector {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* Lighter background */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  border: 1px solid #e0e0e0; /* Light border for definition */
+  width: 50%; /* Limit width for better appearance */
+  margin: 0 auto; /* Center the selector */
+  z-index: 100;
+}
+
+.KeywordSelector button {
+  margin-bottom: 8px;
+  padding: 8px 15px;
+  border: none;
+  background-color: #007bff; /* Primary color */
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left; /* Align text to the left */
+  font-size: 16px; /* Slightly larger font */
+}
+
+.KeywordSelector button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); /* Subtle shadow on hover */
+}

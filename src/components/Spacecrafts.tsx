@@ -3,6 +3,8 @@ import "./Spacecrafts.css";
 import Spacecraft from "../models/Spacecraft";
 import { getAllSpacecrafts } from "../services/theSpaceDevsApi";
 import { durationToSeconds } from "./Astronauts";
+import { Link } from "react-router-dom";
+import LoadingGif from "./LoadingGif";
 
 const Spacecrafts = () => {
   const [allSpacecrafts, setAllSpacecrafts] = useState<Spacecraft[] | null>(
@@ -23,6 +25,10 @@ const Spacecrafts = () => {
   useEffect(() => {
     getAllSpacecrafts().then((res) => setAllSpacecrafts(res));
   }, []);
+
+  if (!allSpacecrafts) {
+    return <LoadingGif />;
+  }
 
   const filterSpacecrafts = (events: Spacecraft[]): Spacecraft[] => {
     let filteredSpacecrafts = events;
@@ -52,6 +58,7 @@ const Spacecrafts = () => {
 
     return filteredSpacecrafts;
   };
+
   return (
     <div className="Spacecrafts">
       <nav>
@@ -87,10 +94,32 @@ const Spacecrafts = () => {
           </>
         )}
       </div>
-      {allSpacecrafts &&
-        filterSpacecrafts(allSpacecrafts)
-          .slice(0, visibleCount)
-          .map((craft) => <p>{craft.name}</p>)}
+      <ul>
+        {allSpacecrafts &&
+          filterSpacecrafts(allSpacecrafts)
+            .slice(0, visibleCount)
+            .map((craft) => (
+              <li className="craft-li">
+                <div className="left">
+                  <img
+                    src={craft.spacecraft_config.image_url}
+                    alt={craft.name}
+                    className="craft-image"
+                  />
+                </div>
+                <div className="right">
+                  <p className="craft-name">{craft.name}</p>
+                  <p className="craft-agency">
+                    {craft.spacecraft_config.agency.name}
+                  </p>
+                  <Link to={`/spacecrafts/${craft._id}`}>
+                    <button className="details-btn">Details</button>
+                  </Link>
+                </div>
+              </li>
+            ))}
+      </ul>
+
       {allSpacecrafts &&
         visibleCount < filterSpacecrafts(allSpacecrafts).length && (
           <button className="load-more-btn" onClick={loadMoreSpaceEvents}>

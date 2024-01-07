@@ -1,28 +1,57 @@
-.RelatedArticlesAndImages #keyword-selector {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  position: absolute;
-  top: 22px;
+.RelatedArticlesAndImages {
+  background-color: #f4f4f4; /* Light grey background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  max-width: 800px; /* Max width for better readability */
+  margin: auto; /* Center align the component */
 }
 
-.RelatedArticlesAndImages #keyword-selector button {
-  border: none;
+.RelatedArticlesAndImages .heading-h2 {
+  text-align: center;
   padding: 10px;
-  transition: 0.3s ease;
-}
-
-.RelatedArticlesAndImages #keyword-selector button:hover {
-  background-color: gray;
+  margin-bottom: 20px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
 
 .RelatedArticlesAndImages .keyword-span {
-  position: absolute;
   cursor: pointer;
-  color: rgb(92, 92, 255);
-  transition: 0.3s ease;
+  color: blue;
 }
 
-.RelatedArticlesAndImages .keyword-span:hover {
-  color: rgb(0, 0, 211);
+.RelatedArticlesAndImages h3 {
+  color: #333; /* Dark text for contrast */
+  margin-bottom: 20px;
+}
+
+.RelatedArticlesAndImages .keyword-span {
+  color: #007bff; /* A blue color for keywords */
+  cursor: pointer; /* Change cursor to indicate interactivity */
+  text-decoration: underline; /* Underline to indicate it's clickable */
+}
+
+.RelatedArticlesAndImages button {
+  background-color: #007bff; /* Matching blue for buttons */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
+}
+
+.RelatedArticlesAndImages button:hover {
+  background-color: #0056b3;
+}
+
+.RelatedArticlesAndImages .more-link {
+  display: inline-block; /* Align with other elements */
+  margin-top: 20px;
+  color: #007bff; /* Consistent blue for links */
+  text-decoration: none; /* No underline */
+}
+
+.RelatedArticlesAndImages a:hover {
+  text-decoration: underline; /* Underline on hover for interactivity */
 }

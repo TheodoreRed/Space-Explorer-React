@@ -4,6 +4,7 @@ import "./SpaceEvents.css";
 import { useState, useEffect, useContext } from "react";
 import SingleSpaceEvent from "./SingleSpaceEvent";
 import AuthContext from "../context/AuthContext";
+import LoadingGif from "./LoadingGif";
 
 const SpaceEvents = () => {
   const { account } = useContext(AuthContext);
@@ -31,6 +32,10 @@ const SpaceEvents = () => {
   useEffect(() => {
     getAllSpaceEvents().then((res) => setSpaceEvents(res));
   }, []);
+
+  if (!spaceEvents) {
+    return <LoadingGif />;
+  }
 
   const filterEvents = (events: SpaceEvent[]): SpaceEvent[] => {
     let filteredEvents = events;
@@ -141,15 +146,11 @@ const SpaceEvents = () => {
       </div>
 
       <ul>
-        {spaceEvents ? (
-          filterEvents(spaceEvents)
-            .slice(0, visibleCount)
-            .map((oneEvent) => {
-              return <SingleSpaceEvent key={oneEvent.id} oneEvent={oneEvent} />;
-            })
-        ) : (
-          <p>TODO: A loading Gif</p>
-        )}
+        {filterEvents(spaceEvents)
+          .slice(0, visibleCount)
+          .map((oneEvent) => {
+            return <SingleSpaceEvent key={oneEvent.id} oneEvent={oneEvent} />;
+          })}
       </ul>
       {spaceEvents && visibleCount < filterEvents(spaceEvents).length && (
         <button className="load-more-btn" onClick={loadMoreSpaceEvents}>

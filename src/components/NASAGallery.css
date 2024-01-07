@@ -1,0 +1,4 @@
+.NASAGallery .flex-btns {
+  display: flex;
+  justify-content: space-around;
+}

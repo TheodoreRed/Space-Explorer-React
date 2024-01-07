@@ -1,0 +1,7 @@
+.ArticlesList {
+  margin-top: 20px;
+}
+.ArticlesList .flex-btns {
+  display: flex;
+  justify-content: space-around;
+}

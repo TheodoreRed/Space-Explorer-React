@@ -1,14 +1,15 @@
 .Spacecrafts {
   display: flex;
   flex-direction: column;
-  padding: 20px;
 }
 
+/* Sub Navigation Styling */
 .Spacecrafts nav div {
   background-color: #a7c3f0;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-top: 20px;
 }
 
 .Spacecrafts nav {
@@ -17,6 +18,61 @@
   margin-bottom: 30px;
 }
 
+/* Spacecraft styling*/
+.Spacecrafts .craft-li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.Spacecrafts .left {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.Spacecrafts .right {
+  flex: 2;
+  text-align: left;
+}
+
+.Spacecrafts .craft-image {
+  width: 30vw; /* Adjust as needed */
+  height: auto;
+  border-radius: 4px;
+}
+
+.Spacecrafts .craft-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.Spacecrafts .craft-agency {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.Spacecrafts .details-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Spacecrafts .details-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Filter Styling */
 .Spacecrafts .filter-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +82,7 @@
 
 .Spacecrafts .filter-container > * {
   margin-bottom: 10px; /* Space between filter inputs */
-  width: 100%; /* Control width of filter inputs */
+  width: 90%; /* Control width of filter inputs */
 }
 
 .Spacecrafts .filter-container input,

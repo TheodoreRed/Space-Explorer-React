@@ -1,0 +1,80 @@
+.SpacecraftDetails {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.SpacecraftDetails nav div {
+  background-color: #a7c3f0;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.SpacecraftDetails nav {
+  display: flex;
+  justify-content: center;
+}
+
+.SpacecraftDetails .nav-a {
+  text-decoration: none;
+  color: blue;
+}
+
+.SpacecraftDetails a:hover {
+  text-decoration: underline;
+}
+
+.SpacecraftDetails .spacecraft-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.SpacecraftDetails .spacecraft-info {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.SpacecraftDetails .spacecraft-name {
+  font-size: 1.5em;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.SpacecraftDetails .spacecraft-description {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.SpacecraftDetails .spacecraft-serial,
+.SpacecraftDetails .spacecraft-status,
+.SpacecraftDetails .spacecraft-agency,
+.SpacecraftDetails .spacecraft-type,
+.SpacecraftDetails .spacecraft-time-in-space {
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.SpacecraftDetails .spacecraft-link {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.SpacecraftDetails .spacecraft-link:hover {
+  background-color: #0056b3;
+}

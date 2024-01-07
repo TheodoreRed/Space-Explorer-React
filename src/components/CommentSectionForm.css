@@ -7,7 +7,7 @@
   padding: 20px;
   box-sizing: border-box; /* Ensures padding doesn't add to the width */
   background-color: #f8f8f8;
-  border-radius: 8px;
+  border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

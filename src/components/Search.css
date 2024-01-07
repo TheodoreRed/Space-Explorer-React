@@ -68,3 +68,16 @@
   display: flex;
   gap: 10px;
 }
+
+.Search .load-more-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: 0.3s ease;
+}
+
+.Search .load-more-btn:hover {
+  background-color: #45a049;
+}

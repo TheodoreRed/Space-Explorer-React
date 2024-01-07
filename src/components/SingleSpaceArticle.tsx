@@ -45,6 +45,16 @@ const SingleSpaceArticle = ({ spaceArticle }: Props) => {
       {spaceArticle.image_url && (
         <img src={spaceArticle.image_url} alt={spaceArticle.title} />
       )}
+      <p>Published by: {spaceArticle.news_site}</p>
+      <p>
+        Published on: {new Date(spaceArticle.published_at).toLocaleDateString()}
+      </p>
+      {spaceArticle.updated_at && (
+        <p>
+          Updated on: {new Date(spaceArticle.updated_at).toLocaleDateString()}
+        </p>
+      )}
+      <div></div>
       <a href={spaceArticle.url} target="_blank" rel="noopener noreferrer">
         View Article
       </a>

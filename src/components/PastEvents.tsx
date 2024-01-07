@@ -4,6 +4,7 @@ import "./PastEvents.css";
 import { useState, useEffect, useContext } from "react";
 import SingleSpaceEvent from "./SingleSpaceEvent";
 import AuthContext from "../context/AuthContext";
+import LoadingGif from "./LoadingGif";
 
 const PastEvents = () => {
   const { account } = useContext(AuthContext);
@@ -30,6 +31,10 @@ const PastEvents = () => {
   useEffect(() => {
     getAllSpaceEvents().then((res) => setpastEvents(res));
   }, []);
+
+  if (!pastEvents) {
+    return <LoadingGif />;
+  }
 
   const filterEvents = (events: SpaceEvent[]): SpaceEvent[] => {
     let filteredEvents = events;
@@ -138,21 +143,17 @@ const PastEvents = () => {
         )}
       </div>
       <ul>
-        {pastEvents ? (
-          filterEvents(pastEvents)
-            .slice(0, visibleCount)
-            .map((oneEvent) => {
-              return (
-                <SingleSpaceEvent
-                  key={oneEvent.id}
-                  oneEvent={oneEvent}
-                  isPast={true}
-                />
-              );
-            })
-        ) : (
-          <p>TODO: A loading Gif</p>
-        )}
+        {filterEvents(pastEvents)
+          .slice(0, visibleCount)
+          .map((oneEvent) => {
+            return (
+              <SingleSpaceEvent
+                key={oneEvent.id}
+                oneEvent={oneEvent}
+                isPast={true}
+              />
+            );
+          })}
       </ul>
       {pastEvents && visibleCount < filterEvents(pastEvents).length && (
         <button className="load-more-btn" onClick={loadMoreSpaceEvents}>

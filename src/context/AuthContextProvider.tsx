@@ -27,7 +27,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
             uid: user.uid,
             displayName: user.displayName ?? "",
             photoURL: user.photoURL ?? "",
-            uniqueName: user.displayName?.split(" ")[0] + "123" ?? "",
+            uniqueName: user.displayName?.split(" ")[0] + "123",
             email: user.email ?? "",
             darkMode: false,
             savedEvents: [],

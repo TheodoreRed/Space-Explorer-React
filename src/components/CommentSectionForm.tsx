@@ -70,7 +70,11 @@ const CommentSectionForm = ({ spaceEvent, setSpaceEvent }: Props) => {
         className="text-area"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="Write your comment here..."
+        placeholder={
+          spaceEvent.comments[0]
+            ? `Discuss the event...`
+            : "Start a discussion!"
+        }
       />
       {user ? (
         <button className="submit-btn" type="submit">

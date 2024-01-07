@@ -22,7 +22,7 @@ interface Props {
 const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
   const { account, setAccount } = useContext(AuthContext);
 
-  const [visibleCount, setVisibleCount] = useState(1);
+  const [visibleCount, setVisibleCount] = useState(4);
   const [filterMostLiked, setFilterMostLiked] = useState(false);
   const [filterNewest, setFilterNewest] = useState(false);
   const [showFilterOptions, setShowFilterOptions] = useState(false);
@@ -46,8 +46,8 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
 
   const handleDelete = async (commentUuid: string) => {
     if (account) {
-      await deleteCommentFromAccount(account._id!, commentUuid);
       await deleteCommentFromSpaceEvent(spaceEvent._id, commentUuid);
+      await deleteCommentFromAccount(account._id!, commentUuid);
 
       getAccountById(account.uid).then((res) => {
         if (res) {
@@ -81,15 +81,18 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
 
   return (
     <div className="CommentSection">
+      <h2>Event Comments</h2>
       <CommentSectionForm
         spaceEvent={spaceEvent}
         setSpaceEvent={setSpaceEvent}
       />
       <div className="filter-container">
-        <button onClick={() => setShowFilterOptions((prev) => !prev)}>
-          Filter{" "}
-          <span className={showFilterOptions ? "flipUpsideDown" : ""}>▼</span>
-        </button>
+        {spaceEvent.comments[0] && (
+          <button onClick={() => setShowFilterOptions((prev) => !prev)}>
+            Filter Comments{" "}
+            <span className={showFilterOptions ? "flipUpsideDown" : ""}>▼</span>
+          </button>
+        )}
         {showFilterOptions && (
           <>
             <div
@@ -145,6 +148,15 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
                   Like{" "}
                 </button>
               </div>
+              {commentObj.replies && commentObj.replies.length > 0 && (
+                <ul className="replies-list">
+                  {commentObj.replies.map((reply) => (
+                    <li key={reply.uuid} className="reply-li">
+                      <p>{reply.content}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
       </ul>
@@ -153,14 +165,14 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
           {spaceEvent &&
           visibleCount < filterComments(spaceEvent.comments).length ? (
             <button className="load-more-btn" onClick={loadMoreComments}>
-              Load More
+              More Comments
             </button>
           ) : (
             <button
               className="load-more-btn"
               onClick={() => setVisibleCount(1)}
             >
-              Close
+              Hide
             </button>
           )}
         </div>

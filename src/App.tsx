@@ -15,6 +15,7 @@ import Astronauts from "./components/Astronauts";
 import AstronautDetails from "./components/AstronautDetails";
 import Spacecrafts from "./components/Spacecrafts";
 import Profile from "./components/Profile";
+import SpacecraftDetails from "./components/SpacecraftDetails";
 
 function App() {
   const { account } = useContext(AuthContext);
@@ -38,7 +39,7 @@ function App() {
         <Route path="/astronauts" element={<Astronauts />} />
         <Route path="/astronauts/:id" element={<AstronautDetails />} />
         <Route path="/spacecrafts" element={<Spacecrafts />} />
-        <Route path="/spacecrafts/:id" element={<AstronautDetails />} />
+        <Route path="/spacecrafts/:id" element={<SpacecraftDetails />} />
         <Route path="/upcoming" element={<SpaceEvents />} />
         <Route path="/upcoming/:id" element={<SpaceEventDetails />} />
         <Route path="/past" element={<PastEvents />} />

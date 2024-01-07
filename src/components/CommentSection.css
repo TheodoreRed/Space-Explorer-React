@@ -4,6 +4,14 @@
   flex-direction: column;
 }
 
+.CommentSection h2 {
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
+  border-top: 1px solid #1a237e;
+  border-bottom: 1px solid #1a237e;
+}
+
 .CommentSection .space-event-ul {
   display: flex;
   flex-direction: column;

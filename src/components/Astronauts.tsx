@@ -4,6 +4,7 @@ import { getAllAstronauts } from "../services/theSpaceDevsApi";
 import { Astronaut } from "../models/Astronaut";
 import { Link } from "react-router-dom";
 import backup_img_one from "../assets/backup-astronaut.png";
+import LoadingGif from "./LoadingGif";
 
 export const durationToSeconds = (duration: string) => {
   // Initialize total seconds to 0
@@ -24,6 +25,20 @@ export const durationToSeconds = (duration: string) => {
   return totalSeconds;
 };
 
+const shuffleAstronaut = (array: Astronaut[]) => {
+  // Iterate through the array backwards
+  for (let i = array.length - 1; i > 0; i--) {
+    // Generate a random index between 0 and i
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    // Store the value at index i in a temporary variable
+    let temp = array[i];
+    // Swap the value at index i with the value at the random index
+    array[i] = array[randomIndex];
+    // Set the value at the random index to the temporary variable
+    array[randomIndex] = temp;
+  }
+};
+
 const Astronauts = () => {
   const [allAstronauts, setAllAstronauts] = useState<Astronaut[] | null>(null);
   const [visibleCount, setVisibleCount] = useState(10); // Show 10 astronauts initially
@@ -37,9 +52,23 @@ const Astronauts = () => {
   const [filterInSpace, setFilterInSpace] = useState(false);
   const [filterMostTimeInSpace, setFilterMostTimeInSpace] = useState(false);
 
+  const [shuffledAstronaut, setShuffledAstronaut] = useState<Astronaut[]>([]);
+
+  useEffect(() => {
+    if (allAstronauts) {
+      const shuffled = [...allAstronauts];
+      shuffleAstronaut(shuffled);
+      setShuffledAstronaut(shuffled);
+    }
+  }, [allAstronauts]);
+
   useEffect(() => {
     getAllAstronauts().then((res) => setAllAstronauts(res));
   }, []);
+
+  if (!allAstronauts) {
+    return <LoadingGif />;
+  }
 
   const loadMoreAstronauts = () => {
     setVisibleCount((prevCount) => prevCount + 10); // Load 10 more astronauts
@@ -139,38 +168,31 @@ const Astronauts = () => {
           </>
         )}
       </div>
-      {allAstronauts ? (
-        <>
-          <ul>
-            {filterAstronauts(allAstronauts)
-              .slice(0, visibleCount)
-              .map((astronaut) => (
-                <li key={astronaut.id} className="naut-container">
-                  <div className="left-side">
-                    <img
-                      src={astronaut.profile_image ?? backup_img_one}
-                      alt={astronaut.name}
-                    />
-                  </div>
 
-                  <div className="right-side">
-                    <h2>{astronaut.name}</h2>
-                    <p>{astronaut.bio}</p>
-                    <Link
-                      to={`/astronauts/${encodeURIComponent(astronaut._id!)}`}
-                    >
-                      <button>Learn More</button>
-                    </Link>
-                  </div>
-                </li>
-              ))}
-          </ul>
-          {visibleCount < filterAstronauts(allAstronauts).length && (
-            <button onClick={loadMoreAstronauts}>Load More</button>
-          )}
-        </>
-      ) : (
-        <p>Loading...</p>
+      <ul>
+        {filterAstronauts(shuffledAstronaut)
+          .slice(0, visibleCount)
+          .map((astronaut) => (
+            <li key={astronaut.id} className="naut-container">
+              <div className="left-side">
+                <img
+                  src={astronaut.profile_image ?? backup_img_one}
+                  alt={astronaut.name}
+                />
+              </div>
+
+              <div className="right-side">
+                <h2>{astronaut.name}</h2>
+                <p>{astronaut.bio}</p>
+                <Link to={`/astronauts/${encodeURIComponent(astronaut._id!)}`}>
+                  <button>Learn More</button>
+                </Link>
+              </div>
+            </li>
+          ))}
+      </ul>
+      {visibleCount < filterAstronauts(allAstronauts).length && (
+        <button onClick={loadMoreAstronauts}>Load More</button>
       )}
     </div>
   );

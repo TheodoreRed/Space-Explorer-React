@@ -19,6 +19,11 @@ const Search = () => {
     null
   );
 
+  const [visibleCount, setVisibleCount] = useState(10);
+  const loadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 10); // Load 10 more
+  };
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -72,14 +77,26 @@ const Search = () => {
       {searchActive && <p>{`Showing results for: ${lastSearch}`}</p>}
       {NASAImages && <p>{NASAImages.length} matches</p>}
       {NASAImages &&
-        NASAImages?.map((image) => (
+        NASAImages?.slice(0, visibleCount).map((image) => (
           <SpaceImage key={image.data[0].nasa_id} image={image} />
         ))}
       {spaceArticles && <p>{spaceArticles.length} matches</p>}
       {spaceArticles &&
-        spaceArticles?.map((article) => (
-          <SingleSpaceArticle key={article.id} spaceArticle={article} />
-        ))}
+        spaceArticles
+          ?.slice(0, visibleCount)
+          .sort(
+            (a, b) =>
+              new Date(b.updated_at).getTime() -
+              new Date(a.updated_at).getTime()
+          )
+          .map((article) => (
+            <SingleSpaceArticle key={article.id} spaceArticle={article} />
+          ))}
+      {spaceArticles && visibleCount < spaceArticles.length && (
+        <button className="load-more-btn" onClick={loadMore}>
+          Load More
+        </button>
+      )}
     </div>
   );
 };
