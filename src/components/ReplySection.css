@@ -1,0 +1,101 @@
+.ReplySection {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px 8px 0 0;
+  border: 6px outset black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.ReplySection .replies-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  overflow-y: auto;
+}
+
+.ReplySection .reply-li {
+  display: flex;
+  gap: 4vw;
+  background-color: #f9f9f9;
+  border: 1px solid #eaeaea;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.ReplySection .reply-li img {
+  width: 70px;
+  height: 70px;
+}
+
+.ReplySection .reply-content-container {
+  padding: 15px 15px 50px 15px;
+}
+
+.ReplySection .reply-li .trash-icon {
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  color: #ff4d4f;
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+}
+
+.ReplySection .reply-li .trash-icon:hover {
+  color: #ff7875;
+}
+
+.ReplySection .reply-li p {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.ReplySection .btn-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ReplySection .btn-container button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background-color: rgb(100, 8, 8);
+  margin-top: 15px;
+  transition: 0.3s ease;
+}
+
+.ReplySection .btn-container button:hover {
+  background-color: red;
+}
+
+/* Media queries for larger screens */
+@media (min-width: 768px) {
+  .ReplySection {
+    position: absolute;
+    bottom: -90px;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .ReplySection .reply-li button {
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+  }
+}

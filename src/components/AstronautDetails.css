@@ -17,14 +17,100 @@
   color: blue;
 }
 
-.AstronautDetails a:hover {
+.AstronautDetails .nav-a:hover {
   text-decoration: underline;
 }
+.AstronautDetails .details-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-.AstronautDetails img {
-  width: 100vw;
+.AstronautDetails .details-image {
+  width: 50vw;
+  height: auto;
+  border-radius: 5px;
+  border: 3px solid #eaeaea;
 }
 
 .AstronautDetails .details-name {
+  color: #333;
+  margin-top: 10px;
+}
+
+.AstronautDetails .details-body {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.AstronautDetails .details-body p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.AstronautDetails .details-body p strong {
+  color: #333;
+}
+
+.AstronautDetails .details-socials {
   text-align: center;
+  margin-top: 20px;
+}
+
+.AstronautDetails .details-twitter,
+.AstronautDetails .details-instagram,
+.AstronautDetails .details-wiki {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.AstronautDetails .details-twitter {
+  background-color: #1da1f2;
+}
+
+.AstronautDetails .details-instagram {
+  background-color: #e1306c;
+}
+
+.AstronautDetails .details-wiki {
+  background-color: #6a6a6a;
+}
+
+.AstronautDetails .details-twitter:hover,
+.AstronautDetails .details-instagram:hover,
+.AstronautDetails .details-wiki:hover {
+  opacity: 0.9;
+}
+
+.AstronautDetails #strong-bio {
+  color: rgb(72, 84, 255);
+  background-color: #addbf8;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  font-weight: normal;
+}
+
+.AstronautDetails #strong-bio:hover {
+  background-color: rgb(54, 100, 185);
+  color: white;
+}
+
+.AstronautDetails #strong-detailed-bio {
+  background-color: rgb(54, 100, 185);
+  color: white;
+  font-weight: normal;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  font-weight: normal;
 }

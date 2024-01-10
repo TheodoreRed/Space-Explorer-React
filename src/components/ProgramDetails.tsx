@@ -16,7 +16,6 @@ const ProgramDetails = ({ program }: Props) => {
       </p>
       <p>Program Description: {program.description}</p>
       {program.image_url && <img src={program.image_url} alt={program.name} />}
-      <p></p>
     </div>
   );
 };

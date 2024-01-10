@@ -55,7 +55,12 @@ const SingleSpaceArticle = ({ spaceArticle }: Props) => {
         </p>
       )}
       <div></div>
-      <a href={spaceArticle.url} target="_blank" rel="noopener noreferrer">
+      <a
+        id="view-article-a"
+        href={spaceArticle.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         View Article
       </a>
     </li>

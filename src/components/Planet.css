@@ -46,3 +46,26 @@
   border-radius: 2px 2px 0 0;
   margin-bottom: 20px;
 }
+
+.Planet button {
+  background-image: linear-gradient(
+    to right,
+    #6dd5fa,
+    #4caf50
+  ); /* Gradient background */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Planet button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}

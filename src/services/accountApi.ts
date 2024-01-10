@@ -83,3 +83,55 @@ export const deleteCommentFromAccount = async (
     console.error("Error deleting comment from account:", err);
   }
 };
+
+// Function to add a reply to a comment in an account
+export const addReplyToAccountComment = async (
+  accountId: string,
+  commentUuid: string,
+  reply: UserComment
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/accounts/${encodeURIComponent(
+        accountId
+      )}/add-reply-to-comment`,
+      { commentUuid, reply }
+    );
+  } catch (err) {
+    console.error("Error adding reply to comment in account:", err);
+  }
+};
+
+// Function to delete a reply from a comment in an account
+export const deleteReplyFromAccountComment = async (
+  accountId: string,
+  commentUuid: string,
+  replyUuid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/accounts/${encodeURIComponent(
+        accountId
+      )}/delete-reply-from-comment`,
+      { commentUuid, replyUuid }
+    );
+  } catch (err) {
+    console.error("Error deleting reply from comment in account:", err);
+  }
+};
+
+// Function to like a comment in Account.comments array
+export const likeCommentInAccount = async (
+  accountId: string,
+  commentUuid: string,
+  userUid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/accounts/${encodeURIComponent(accountId)}/like-comment`,
+      { commentUuid, userUid }
+    );
+  } catch (err) {
+    console.error("Error liking comment in account:", err);
+  }
+};

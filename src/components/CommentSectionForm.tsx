@@ -68,6 +68,7 @@ const CommentSectionForm = ({ spaceEvent, setSpaceEvent }: Props) => {
     <form className="CommentSectionForm" onSubmit={submitHandler}>
       <textarea
         className="text-area"
+        id="text-area"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder={

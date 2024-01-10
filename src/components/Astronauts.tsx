@@ -91,14 +91,28 @@ const Astronauts = () => {
     }
 
     if (filterMinAge) {
-      filteredAstronauts = filteredAstronauts.filter(
-        (naut) => naut.age && naut.age >= +filterMinAge
-      );
+      filteredAstronauts = filteredAstronauts.filter((naut) => {
+        if (naut.date_of_birth) {
+          return (
+            (new Date().getTime() - new Date(naut.date_of_birth).getTime()) /
+              31557600000 >
+            +filterMinAge
+          );
+        }
+        return naut.age && naut.age >= +filterMinAge;
+      });
     }
     if (filterMaxAge) {
-      filteredAstronauts = filteredAstronauts.filter(
-        (naut) => naut.age && naut.age <= +filterMaxAge
-      );
+      filteredAstronauts = filteredAstronauts.filter((naut) => {
+        if (naut.date_of_birth) {
+          return (
+            (new Date().getTime() - new Date(naut.date_of_birth).getTime()) /
+              31557600000 <
+            +filterMaxAge
+          );
+        }
+        return naut.age && naut.age <= +filterMaxAge;
+      });
     }
     if (filterMostTimeInSpace) {
       filteredAstronauts = filteredAstronauts.sort((a, b) => {

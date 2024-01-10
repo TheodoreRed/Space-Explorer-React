@@ -4,6 +4,7 @@ import "./SpacecraftDetails.css";
 import { Link, useParams } from "react-router-dom";
 import { getSpacecraftById } from "../services/theSpaceDevsApi";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
+import { formatTimeInSpace } from "./AstronautDetails";
 
 const SpacecraftDetails = () => {
   const [craft, setCraft] = useState<Spacecraft | null>(null);
@@ -43,7 +44,7 @@ const SpacecraftDetails = () => {
         <h3 className="spacecraft-name">{craft.name}</h3>
         <p className="spacecraft-description">{craft.description}</p>
         <p className="spacecraft-time-in-space">
-          Time In Space: {craft.time_in_space}
+          Time In Space: {formatTimeInSpace(craft.time_in_space)}
         </p>
         <p className="spacecraft-serial">
           Serial Number: {craft.serial_number || "N/A"}

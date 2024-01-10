@@ -20,6 +20,13 @@
   transition: transform 0.2s linear;
 }
 
+.Header h1 span span {
+  font-size: 1rem;
+  position: relative;
+  left: 5px;
+  bottom: 5px;
+}
+
 .Header .flipUpsideDown {
   transform: rotate(-180deg);
 }

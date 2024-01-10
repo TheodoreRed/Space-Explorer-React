@@ -5,8 +5,30 @@ import { Astronaut } from "../models/Astronaut";
 import "./AstronautDetails.css";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
 
+export const formatTimeInSpace = (duration: string) => {
+  const match = duration.match(/P(\d+D)?T(\d+H)?(\d+M)?(\d+S)?/);
+  if (!match) {
+    return "";
+  }
+  const days = match[1] ? parseInt(match[1]) : 0;
+  const hours = match[2] ? parseInt(match[2]) : 0;
+  const minutes = match[3] ? parseInt(match[3]) : 0;
+  const seconds = match[4] ? parseInt(match[4]) : 0;
+
+  let formattedDuration = "";
+  if (days > 0) formattedDuration += `${days} days, `;
+  if (hours > 0) formattedDuration += `${hours} hours, `;
+  if (minutes > 0) formattedDuration += `${minutes} minutes, `;
+  if (seconds > 0) formattedDuration += `${seconds} seconds`;
+
+  // Remove trailing comma and space if they exist
+  return formattedDuration.replace(/, $/, "");
+};
+
 const AstronautDetails = () => {
   const [astronaut, setAstronaut] = useState<Astronaut | null>(null);
+  const [showDetailedBio, setShowDetailedBio] = useState(false);
+
   const id: string | undefined = useParams().id;
 
   useEffect(() => {
@@ -22,6 +44,10 @@ const AstronautDetails = () => {
   if (!astronaut) {
     return <div className="AstronautDetails-loading">Loading...</div>;
   }
+
+  const toggleDetailedBio = () => {
+    setShowDetailedBio(!showDetailedBio);
+  };
 
   return (
     <div className="AstronautDetails">
@@ -56,17 +82,31 @@ const AstronautDetails = () => {
           <strong>Agency:</strong> {astronaut.agency.name}
         </p>
         <p>
-          <strong>Time in Space:</strong> {astronaut.time_in_space}
-        </p>
-        <p>
           <strong>Number of Flights:</strong> {astronaut.flights_count}
         </p>
+        <p>
+          <strong>Time in Space:</strong>{" "}
+          {formatTimeInSpace(astronaut.time_in_space)}
+        </p>
+
         <p>
           <strong>Spacewalks:</strong> {astronaut.spacewalks_count}
         </p>
         <p>
-          <strong>Biography:</strong> {astronaut.bio}
+          <strong>Time Space Walking:</strong>{" "}
+          {formatTimeInSpace(astronaut.eva_time)}
         </p>
+
+        <p>
+          <strong
+            id={showDetailedBio ? "strong-detailed-bio" : "strong-bio"}
+            onClick={toggleDetailedBio}
+          >
+            Biography
+          </strong>{" "}
+          {showDetailedBio ? astronaut.detailedInfo : astronaut.bio}
+        </p>
+
         <div className="details-socials">
           {astronaut.twitter && (
             <a

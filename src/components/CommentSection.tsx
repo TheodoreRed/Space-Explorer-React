@@ -13,18 +13,38 @@ import {
 import "./CommentSection.css";
 import CommentSectionForm from "./CommentSectionForm";
 import { UserComment } from "../models/Account";
+import ReplySection from "./ReplySection";
 
 interface Props {
   spaceEvent: SpaceEvent;
   setSpaceEvent: (s: SpaceEvent) => void;
 }
 
+export const formatTimeAgo = (dateString: string) => {
+  const now = new Date();
+  const commentDate = new Date(dateString);
+  const diffInSeconds = Math.floor(
+    (now.getTime() - commentDate.getTime()) / 1000
+  );
+
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds}s ago`;
+  } else if (diffInSeconds < 3600) {
+    return `${Math.floor(diffInSeconds / 60)}m ago`;
+  } else if (diffInSeconds < 86400) {
+    return `${Math.floor(diffInSeconds / 3600)}h ago`;
+  } else {
+    return `${Math.floor(diffInSeconds / 86400)}d ago`;
+  }
+};
+
 const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
   const { account, setAccount } = useContext(AuthContext);
 
+  const [selectedReplyUuid, setSelectedReplyUUid] = useState("");
+
   const [visibleCount, setVisibleCount] = useState(4);
   const [filterMostLiked, setFilterMostLiked] = useState(false);
-  const [filterNewest, setFilterNewest] = useState(false);
   const [showFilterOptions, setShowFilterOptions] = useState(false);
 
   const loadMoreComments = () => {
@@ -33,11 +53,14 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
 
   const filterComments = (allComments: UserComment[]): UserComment[] => {
     let filteredComments = allComments;
+    filteredComments = filteredComments.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
 
     if (filterMostLiked) {
       filteredComments = filteredComments.sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        (a, b) => b.likes.length - a.likes.length
       );
     }
 
@@ -87,7 +110,7 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
         setSpaceEvent={setSpaceEvent}
       />
       <div className="filter-container">
-        {spaceEvent.comments[0] && (
+        {spaceEvent.comments[0] && spaceEvent.comments[1] && (
           <button onClick={() => setShowFilterOptions((prev) => !prev)}>
             Filter Comments{" "}
             <span className={showFilterOptions ? "flipUpsideDown" : ""}>▼</span>
@@ -98,20 +121,10 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
             <div
               className="filter-btn"
               onClick={() => {
-                setFilterNewest(false);
                 setFilterMostLiked((prev) => !prev);
               }}
             >
               Most Liked {filterMostLiked ? "☑" : "🔲"}
-            </div>
-            <div
-              className="filter-btn"
-              onClick={() => {
-                setFilterMostLiked(false);
-                setFilterNewest((prev) => !prev);
-              }}
-            >
-              Newest {filterNewest ? "☑" : "🔲"}
             </div>
           </>
         )}
@@ -137,7 +150,18 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
               <div className="comment-info">
                 <p className="comment-author">{commentObj.uniqueName}</p>
                 <p className="comment-content">{commentObj.content}</p>
-
+                <p className="comment-date">
+                  {formatTimeAgo(commentObj.createdAt.toString())}
+                </p>
+                <button
+                  className="comment-reply"
+                  onClick={() => setSelectedReplyUUid(commentObj.uuid)}
+                >
+                  <span className="comment-reply-span">
+                    {commentObj.replies.length}
+                  </span>
+                  Reply{" "}
+                </button>
                 <button
                   className="comment-like"
                   onClick={() => handleLike(commentObj.uuid)}
@@ -148,14 +172,14 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
                   Like{" "}
                 </button>
               </div>
-              {commentObj.replies && commentObj.replies.length > 0 && (
-                <ul className="replies-list">
-                  {commentObj.replies.map((reply) => (
-                    <li key={reply.uuid} className="reply-li">
-                      <p>{reply.content}</p>
-                    </li>
-                  ))}
-                </ul>
+              {selectedReplyUuid === commentObj.uuid && (
+                <ReplySection
+                  replies={commentObj.replies}
+                  originalComment={commentObj}
+                  spaceEvent={spaceEvent}
+                  setSpaceEvent={setSpaceEvent}
+                  setSelectedReplyUUid={setSelectedReplyUUid}
+                />
               )}
             </li>
           ))}

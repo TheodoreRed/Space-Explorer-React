@@ -62,7 +62,11 @@ const SpaceEventDetails = ({ isPast }: Props) => {
             {!isPast ? (
               <div>
                 Events/
-                <Link to="/upcoming" style={{ color: "blue" }}>
+                <Link
+                  className="nav-a"
+                  to="/upcoming"
+                  style={{ color: "blue" }}
+                >
                   Upcoming
                 </Link>
                 /<strong>{spaceEvent.name}</strong>
@@ -77,13 +81,16 @@ const SpaceEventDetails = ({ isPast }: Props) => {
               </div>
             )}
           </nav>
-          <h2>{spaceEvent.name}</h2>
-          <p>{spaceEvent.description}</p>
-          <p>Event: {spaceEvent.type.name}</p>
-          <p>Date: {spaceEvent.date.slice(0, 10)}</p>
-          <p>Interested: {spaceEvent.interested ?? 0}</p>
+          <h2 className="event-name-h2">{spaceEvent.name}</h2>
+          <p className="event-description">{spaceEvent.description}</p>
+          <p className="event-type">Event: {spaceEvent.type.name}</p>
+          <p className="event-date">Date: {spaceEvent.date.slice(0, 10)}</p>
+          <p className="event-description">
+            Interested: {spaceEvent.interested ?? 0}
+          </p>
           {spaceEvent.news_url && (
             <a
+              className="event-url"
               href={spaceEvent.news_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -112,14 +119,14 @@ const SpaceEventDetails = ({ isPast }: Props) => {
           {spaceEvent.feature_image && (
             <img src={spaceEvent.feature_image} alt={spaceEvent.name} />
           )}
-          <h3>Event Details</h3>
-          <section className="detailedInfoContainer">
-            <p>{spaceEvent.detailedInfo}</p>
-          </section>
+
+          <div className="event-detailedInfo">
+            <h3 className="event-details-h3">Event Details</h3>
+            {spaceEvent.detailedInfo}
+          </div>
           {spaceEvent.launches.map((launch) => (
             <LaunchDetails key={launch.id} launch={launch} />
           ))}
-          <p>Programs Involved</p>
           {spaceEvent.program.map((program) => (
             <ProgramDetails key={program.id} program={program} />
           ))}

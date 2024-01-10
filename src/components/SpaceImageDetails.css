@@ -1,47 +1,86 @@
 .SpaceImageDetails {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  font-family: "Arial", sans-serif;
-  color: #333;
   background-color: #f4f4f4;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
 }
 
-.SpaceImageDetails .title {
-  font-size: 28px;
-  color: #0056b3;
-  margin-bottom: 15px;
-}
-
-.SpaceImageDetails .description,
-.SpaceImageDetails .date-created {
-  font-size: 16px;
-  margin-bottom: 15px;
+.SpaceImageDetails .save-img-btn {
+  border: 2px solid transparent;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
   text-align: center;
-}
-
-.SpaceImageDetails .image {
-  max-width: 80%;
-  height: auto;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
   border-radius: 4px;
 }
 
-.SpaceImageDetails .download-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  text-transform: uppercase;
+.SpaceImageDetails .save-img-btn.saved {
+  background-color: #008cba;
 }
 
-.SpaceImageDetails .download-button:hover {
-  background-color: #218838;
+.SpaceImageDetails .save-img-btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
+}
+
+.SpaceImageDetails .img-title {
+  color: #333;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.SpaceImageDetails .img-description {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.SpaceImageDetails .img-date {
+  color: #999;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.SpaceImageDetails .img {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.SpaceImageDetails .img-center,
+.SpaceImageDetails .img-secondary-creator {
+  color: #333;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.SpaceImageDetails .download-btn {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  border: 2px solid transparent; /* Invisible border */
+  transition: 0.5s ease;
+}
+
+.SpaceImageDetails .download-btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
 }

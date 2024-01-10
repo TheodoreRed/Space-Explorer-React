@@ -14,6 +14,9 @@ interface Props {
 }
 
 const RelatedArticlesAndImages = ({ keywords }: Props) => {
+  if (!keywords) {
+    return null;
+  }
   const [NASAImages, setNASAImages] = useState<NASAImage[] | null>(null);
   const [spaceArticles, setSpaceArticles] = useState<SpaceArticle[] | null>(
     null

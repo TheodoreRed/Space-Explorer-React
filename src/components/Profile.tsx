@@ -19,6 +19,7 @@ import { updateAccountById } from "../services/accountApi";
 const Profile = () => {
   const { account, user, setAccount } = useContext(AuthContext);
   const [visibleCommentCount, setVisibleCommentCount] = useState(4);
+  const [showComments, setShowComments] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [dropDownChoice, setDropDownChoice] = useState("Saved Events");
   const [savedEventsDetails, setSavedEventsDetails] = useState<SpaceEvent[]>(
@@ -171,39 +172,41 @@ const Profile = () => {
         </div>
       </div>
       <div className="comments">
-        <h3>Comments</h3>
-        <ul className="comment-ul">
-          {account.comments.slice(0, visibleCommentCount).map((comment) => (
-            <li className="comment-li" key={comment.uuid}>
-              {isSpaceEventUpcoming(comment.eventDate) ? (
-                <Link to={`/upcoming/${encodeURIComponent(comment.eventId)}`}>
-                  {comment.content.length > 30
-                    ? `${comment.content.slice(0, 30)}...`
-                    : comment.content}
-                </Link>
-              ) : (
-                <Link to={`/past/${encodeURIComponent(comment.eventId)}`}>
-                  {comment.content.length > 30
-                    ? `${comment.content.slice(0, 30)}...`
-                    : comment.content}
-                </Link>
-              )}
-            </li>
-          ))}
-          {blankLines.map((_, index) => (
-            <li className="comment-li" key={`blank-${index}`}>
-              &nbsp;
-            </li> // Blank line
-          ))}
-          {account.comments.length > visibleCommentCount && (
-            <button
-              className="load-more-comments-btn"
-              onClick={loadMoreComments}
-            >
-              More Comments
-            </button>
-          )}
-        </ul>
+        <h3 onClick={() => setShowComments((prev) => !prev)}>Comments</h3>
+        {showComments && (
+          <ul className="comment-ul">
+            {account.comments.slice(0, visibleCommentCount).map((comment) => (
+              <li className="comment-li" key={comment.uuid}>
+                {isSpaceEventUpcoming(comment.eventDate) ? (
+                  <Link to={`/upcoming/${encodeURIComponent(comment.eventId)}`}>
+                    {comment.content.length > 30
+                      ? `${comment.content.slice(0, 30)}...`
+                      : comment.content}
+                  </Link>
+                ) : (
+                  <Link to={`/past/${encodeURIComponent(comment.eventId)}`}>
+                    {comment.content.length > 30
+                      ? `${comment.content.slice(0, 30)}...`
+                      : comment.content}
+                  </Link>
+                )}
+              </li>
+            ))}
+            {blankLines.map((_, index) => (
+              <li className="comment-li" key={`blank-${index}`}>
+                &nbsp;
+              </li> // Blank line
+            ))}
+            {account.comments.length > visibleCommentCount && (
+              <button
+                className="load-more-comments-btn"
+                onClick={loadMoreComments}
+              >
+                More Comments
+              </button>
+            )}
+          </ul>
+        )}
       </div>
       <h3 className="saved-items-h3">
         <span
@@ -215,35 +218,37 @@ const Profile = () => {
           <span className={showDropDown ? "flipUpsideDown" : ""}>▼</span>
         </span>
         {showDropDown && (
-          <ul className="dropdown">
-            <li
-              className="dropdown-li"
-              onClick={() => {
-                setDropDownChoice("Saved Events");
-                setShowDropDown(false);
-              }}
-            >
-              Events
-            </li>
-            <li
-              className="dropdown-li"
-              onClick={() => {
-                setDropDownChoice("Saved Articles");
-                setShowDropDown(false);
-              }}
-            >
-              Articles
-            </li>
-            <li
-              className="dropdown-li"
-              onClick={() => {
-                setDropDownChoice("Saved Images");
-                setShowDropDown(false);
-              }}
-            >
-              Images
-            </li>
-          </ul>
+          <div className="dropdown-container">
+            <ul className="dropdown">
+              <li
+                className="dropdown-li"
+                onClick={() => {
+                  setDropDownChoice("Saved Events");
+                  setShowDropDown(false);
+                }}
+              >
+                Events
+              </li>
+              <li
+                className="dropdown-li"
+                onClick={() => {
+                  setDropDownChoice("Saved Articles");
+                  setShowDropDown(false);
+                }}
+              >
+                Articles
+              </li>
+              <li
+                className="dropdown-li"
+                onClick={() => {
+                  setDropDownChoice("Saved Images");
+                  setShowDropDown(false);
+                }}
+              >
+                Images
+              </li>
+            </ul>
+          </div>
         )}
       </h3>
       {dropDownChoice === "Saved Events" && (
@@ -256,14 +261,14 @@ const Profile = () => {
       {dropDownChoice === "Saved Articles" && (
         <ul>
           {account.savedArticles.map((art) => (
-            <SingleSpaceArticle spaceArticle={art} />
+            <SingleSpaceArticle key={art.id} spaceArticle={art} />
           ))}
         </ul>
       )}
       {dropDownChoice === "Saved Images" && (
         <ul>
           {account.savedImages.map((i) => (
-            <SpaceImage image={i} />
+            <SpaceImage key={i.data[0].nasa_id} image={i} />
           ))}
         </ul>
       )}

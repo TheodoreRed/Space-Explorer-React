@@ -1,10 +1,39 @@
 .ProgramDetails {
-  display: flex;
-  flex-direction: column;
+  background-color: #f4f4f4;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  margin: auto;
+}
+
+.ProgramDetails p {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.ProgramDetails a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.ProgramDetails a:hover {
+  text-decoration: underline;
 }
 
 .ProgramDetails img {
-  width: 30%;
-  position: relative;
-  left: 36%;
+  height: auto;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 768px) {
+  .ProgramDetails {
+    padding: 20px;
+  }
+
+  .ProgramDetails p {
+    font-size: 16px;
+  }
 }

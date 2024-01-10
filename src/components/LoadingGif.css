@@ -6,5 +6,6 @@
 }
 
 .LoadingGif img {
+  width: 90vw;
   border-radius: 50%;
 }

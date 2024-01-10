@@ -26,12 +26,12 @@
   width: 90%;
   max-width: 400px;
   height: auto;
-  margin-top: 20px;
+  margin: 20px 0;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.SingleSpaceArticle a {
+.SingleSpaceArticle #view-article-a {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -42,7 +42,7 @@
   transition: background-color 0.3s ease;
 }
 
-.SingleSpaceArticle a:hover {
+.SingleSpaceArticle #view-article-a:hover {
   background-color: #0056b3;
 }
 

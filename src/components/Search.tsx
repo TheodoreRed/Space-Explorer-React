@@ -77,13 +77,13 @@ const Search = () => {
       {searchActive && <p>{`Showing results for: ${lastSearch}`}</p>}
       {NASAImages && <p>{NASAImages.length} matches</p>}
       {NASAImages &&
-        NASAImages?.slice(0, visibleCount).map((image) => (
+        NASAImages.slice(0, visibleCount).map((image) => (
           <SpaceImage key={image.data[0].nasa_id} image={image} />
         ))}
       {spaceArticles && <p>{spaceArticles.length} matches</p>}
       {spaceArticles &&
         spaceArticles
-          ?.slice(0, visibleCount)
+          .slice(0, visibleCount)
           .sort(
             (a, b) =>
               new Date(b.updated_at).getTime() -
@@ -95,6 +95,23 @@ const Search = () => {
       {spaceArticles && visibleCount < spaceArticles.length && (
         <button className="load-more-btn" onClick={loadMore}>
           Load More
+        </button>
+      )}
+      {spaceArticles &&
+        spaceArticles[0] &&
+        visibleCount >= spaceArticles.length && (
+          <button className="load-more-btn" onClick={() => setVisibleCount(0)}>
+            Collapse
+          </button>
+        )}
+      {NASAImages && visibleCount < NASAImages.length && (
+        <button className="load-more-btn" onClick={loadMore}>
+          Load More
+        </button>
+      )}
+      {NASAImages && NASAImages[0] && visibleCount >= NASAImages.length && (
+        <button className="load-more-btn" onClick={() => setVisibleCount(0)}>
+          Collapse
         </button>
       )}
     </div>

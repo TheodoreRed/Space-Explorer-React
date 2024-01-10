@@ -94,3 +94,59 @@ export const toggleLikeOnComment = async (
     console.error("Error toggling like on comment:", err);
   }
 };
+
+// Function to add a reply to a comment in a space event
+export const addReplyToSpaceEventComment = async (
+  eventId: string,
+  commentUuid: string,
+  reply: UserComment
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(
+        eventId
+      )}/comments/${encodeURIComponent(commentUuid)}/add-reply`,
+      { reply }
+    );
+  } catch (err) {
+    console.error("Error adding reply to space event comment:", err);
+  }
+};
+
+// Function to delete a reply from a comment in a space event
+export const deleteReplyFromSpaceEventComment = async (
+  eventId: string,
+  commentUuid: string,
+  replyUuid: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(
+        eventId
+      )}/comments/${encodeURIComponent(
+        commentUuid
+      )}/delete-reply/${encodeURIComponent(replyUuid)}`
+    );
+  } catch (err) {
+    console.error("Error deleting reply from space event comment:", err);
+  }
+};
+
+// Function to toggle like status of a reply in a space event
+export const toggleLikeOnReply = async (
+  eventId: string,
+  replyUuid: string,
+  userId: string
+): Promise<void> => {
+  try {
+    await axios.patch(
+      `${baseUrl}/space-events/${encodeURIComponent(
+        eventId
+      )}/toggle-like-reply/${encodeURIComponent(
+        replyUuid
+      )}/${encodeURIComponent(userId)}`
+    );
+  } catch (err) {
+    console.error("Error toggling like on reply:", err);
+  }
+};

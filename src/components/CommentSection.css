@@ -51,6 +51,10 @@
   padding: 15px;
 }
 
+.CommentSection .comment-info .comment-date {
+  padding: 15px;
+}
+
 .CommentSection .comment-like {
   border: none;
   background-color: #3eaaf1;
@@ -65,11 +69,27 @@
   letter-spacing: 0.6px;
 }
 
-.CommentSection .comment-like:hover {
+.CommentSection .comment-reply {
+  border: none;
+  background-color: #3eaaf1;
+  color: white;
+  width: fit-content;
+  position: absolute;
+  right: 115px;
+  bottom: 15px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  letter-spacing: 0.6px;
+}
+
+.CommentSection .comment-like:hover,
+.CommentSection .comment-reply:hover {
   background-color: #2879af;
 }
 
-.CommentSection .comment-like-span {
+.CommentSection .comment-like-span,
+.CommentSection .comment-reply-span {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding-right: 15px;
 }
