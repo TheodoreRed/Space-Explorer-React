@@ -9,3 +9,9 @@
   width: 90vw;
   border-radius: 50%;
 }
+
+@media only screen and (min-width: 768px) {
+  .LoadingGif img {
+    width: 30vw;
+  }
+}

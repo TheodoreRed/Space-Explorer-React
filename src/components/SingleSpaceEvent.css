@@ -63,3 +63,23 @@
 .SingleSpaceEvent button:hover {
   background-color: #0056b3;
 }
+
+.SingleSpaceEvent .big-screen-p {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .SingleSpaceEvent .big-screen-p {
+    display: block;
+  }
+
+  .SingleSpaceEvent h3 {
+    font-size: 1.7rem;
+    padding-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .SingleSpaceEvent .event-content {
+    font-size: 1.2rem;
+  }
+}

@@ -134,25 +134,28 @@ const CommentSection = ({ spaceEvent, setSpaceEvent }: Props) => {
           .slice(0, visibleCount)
           .map((commentObj) => (
             <li key={commentObj.uuid} className="space-event-li">
-              <button
-                className="delete-comment-btn"
-                onClick={() => handleDelete(commentObj.uuid)}
-              >
-                X
-              </button>
+              {commentObj.uid === account?.uid && (
+                <button
+                  className="delete-comment-btn"
+                  onClick={() => handleDelete(commentObj.uuid)}
+                >
+                  X
+                </button>
+              )}
               {commentObj.photoURL && (
                 <img
                   src={`https://robohash.org/${commentObj.uniqueName}?set=set1`}
                   alt="robohash.org photo"
                 />
               )}
+              <p className="comment-date">
+                {formatTimeAgo(commentObj.createdAt.toString())}
+              </p>
 
               <div className="comment-info">
                 <p className="comment-author">{commentObj.uniqueName}</p>
                 <p className="comment-content">{commentObj.content}</p>
-                <p className="comment-date">
-                  {formatTimeAgo(commentObj.createdAt.toString())}
-                </p>
+
                 <button
                   className="comment-reply"
                   onClick={() => setSelectedReplyUUid(commentObj.uuid)}

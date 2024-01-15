@@ -9,13 +9,14 @@ interface Props {
 
 const SingleSpaceEvent = ({ oneEvent, isPast }: Props) => {
   return (
-    <div className="SingleSpaceEvent">
+    <li className="SingleSpaceEvent">
       <h3>{oneEvent.name}</h3>
       <div className="content">
         <div className="event-content">
           <p>Event: {oneEvent.type.name}</p>
           <p>Date: {oneEvent.date.slice(0, 10)}</p>
           <p>Interested: {oneEvent.interested ?? 0}</p>
+          <p className="big-screen-p">{oneEvent.description}</p>
         </div>
         {oneEvent.feature_image && (
           <img
@@ -34,7 +35,7 @@ const SingleSpaceEvent = ({ oneEvent, isPast }: Props) => {
           <button>Details</button>
         </Link>
       )}
-    </div>
+    </li>
   );
 };
 

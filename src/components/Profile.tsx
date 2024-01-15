@@ -19,7 +19,7 @@ import { updateAccountById } from "../services/accountApi";
 const Profile = () => {
   const { account, user, setAccount } = useContext(AuthContext);
   const [visibleCommentCount, setVisibleCommentCount] = useState(4);
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(true);
   const [showDropDown, setShowDropDown] = useState(false);
   const [dropDownChoice, setDropDownChoice] = useState("Saved Events");
   const [savedEventsDetails, setSavedEventsDetails] = useState<SpaceEvent[]>(
@@ -74,140 +74,157 @@ const Profile = () => {
     setShowNewNameForm(false);
   };
 
+  const checkSavedItemExists = () => {
+    if (dropDownChoice === "Saved Events") {
+      return account.savedEvents[0];
+    }
+    if (dropDownChoice === "Saved Articles") {
+      return account.savedArticles[0];
+    }
+    if (dropDownChoice === "Saved Images") {
+      return account.savedImages[0];
+    }
+  };
+
   const blankLinesCount = Math.max(4 - account.comments.length, 0);
   const blankLines = Array(blankLinesCount).fill(null);
 
   return (
     <div className="Profile">
       <h2>{account?.displayName}</h2>
-      <div className="account-info">
-        <div className="left">
-          <p
-            className="reg-text"
-            style={{
-              textAlign: "center",
-              textDecoration: "1px underline",
-              fontSize: "1.25rem",
-            }}
-          >
-            Display Name
-          </p>
+      <div className="info-comment-container">
+        <div className="account-info">
+          <div className="left">
+            <p
+              className="reg-text"
+              style={{
+                textAlign: "center",
+                textDecoration: "1px underline",
+                fontSize: "1.25rem",
+              }}
+            >
+              Display Name
+            </p>
 
-          <div className="name">
-            {!showNewNameForm ? (
-              <>
-                {account?.uniqueName === ""
-                  ? account.displayName.split(" ")[0] + "123"
-                  : account?.uniqueName}
-                <FontAwesomeIcon
-                  icon={faPencil}
-                  style={{
-                    fontSize: "1rem",
-                    position: "relative",
-                    bottom: "10px",
-                    left: "4px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setNewName(account.uniqueName ?? "");
-                    setShowNewNameForm(true);
-                  }}
-                />
-              </>
-            ) : (
-              <>
-                <form className="new-name-form" onSubmit={handleUpdateName}>
-                  {account.uniqueName !== newName && (
-                    <button type="submit" className="submit-button">
-                      <FontAwesomeIcon
-                        icon={faSquareCheck}
-                        style={{
-                          fontSize: "1.2rem",
-                          cursor: "pointer",
-                          color: "green",
-                        }}
-                      />
-                    </button>
-                  )}
-                  <label htmlFor="new-name"></label>
-                  <input
-                    type="text"
-                    id="new-name"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                  />
+            <div className="name">
+              {!showNewNameForm ? (
+                <>
+                  {account?.uniqueName === ""
+                    ? account.displayName.split(" ")[0] + "123"
+                    : account?.uniqueName}
                   <FontAwesomeIcon
-                    icon={faX}
+                    icon={faPencil}
                     style={{
                       fontSize: "1rem",
                       position: "relative",
-                      bottom: "0px",
+                      bottom: "10px",
                       left: "4px",
                       cursor: "pointer",
                     }}
-                    onClick={() => setShowNewNameForm(false)}
+                    onClick={() => {
+                      setNewName(account.uniqueName ?? "");
+                      setShowNewNameForm(true);
+                    }}
                   />
-                </form>
-              </>
-            )}
+                </>
+              ) : (
+                <>
+                  <form className="new-name-form" onSubmit={handleUpdateName}>
+                    {account.uniqueName !== newName && newName.length <= 11 && (
+                      <button type="submit" className="submit-button">
+                        <FontAwesomeIcon
+                          icon={faSquareCheck}
+                          style={{
+                            fontSize: "1.2rem",
+                            cursor: "pointer",
+                            color: "green",
+                          }}
+                        />
+                      </button>
+                    )}
+                    <label htmlFor="new-name"></label>
+                    <input
+                      type="text"
+                      id="new-name"
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faX}
+                      style={{
+                        fontSize: "1rem",
+                        position: "relative",
+                        bottom: "0px",
+                        left: "4px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setShowNewNameForm(false)}
+                    />
+                  </form>
+                </>
+              )}
+            </div>
+            <div className="info-item">
+              <span className="info-label">Saved Events:</span>
+              <span className="info-value">{account.savedEvents.length}</span>
+            </div>
+            <div className="info-item">
+              <span className="info-label">Saved Articles:</span>
+              <span className="info-value">{account.savedArticles.length}</span>
+            </div>
+            <div className="info-item">
+              <span className="info-label">Saved Images:</span>
+              <span className="info-value">{account.savedImages.length}</span>
+            </div>
           </div>
-          <div className="info-item">
-            <span className="info-label">Saved Events:</span>
-            <span className="info-value">{account.savedEvents.length}</span>
-          </div>
-          <div className="info-item">
-            <span className="info-label">Saved Articles:</span>
-            <span className="info-value">{account.savedArticles.length}</span>
-          </div>
-          <div className="info-item">
-            <span className="info-label">Saved Images:</span>
-            <span className="info-value">{account.savedImages.length}</span>
+          <div className="right">
+            <img
+              src={`https://robohash.org/${account.uniqueName}?set=set1`}
+              alt="robohash.org photo"
+            />
           </div>
         </div>
-        <div className="right">
-          <img
-            src={`https://robohash.org/${account.uniqueName}?set=set1`}
-            alt="robohash.org photo"
-          />
+        <div className="comments">
+          <h3 onClick={() => setShowComments((prev) => !prev)}>Comments</h3>
+          {showComments && (
+            <ul className="comment-ul">
+              {account.comments.slice(0, visibleCommentCount).map((comment) => (
+                <li className="comment-li" key={comment.uuid}>
+                  {isSpaceEventUpcoming(comment.eventDate) ? (
+                    <Link
+                      to={`/upcoming/${encodeURIComponent(comment.eventId)}`}
+                    >
+                      {comment.content.length > 30
+                        ? `${comment.content.slice(0, 30)}...`
+                        : comment.content}
+                    </Link>
+                  ) : (
+                    <Link to={`/past/${encodeURIComponent(comment.eventId)}`}>
+                      {comment.content.length > 30
+                        ? `${comment.content.slice(0, 30)}...`
+                        : comment.content}
+                    </Link>
+                  )}
+                </li>
+              ))}
+              {blankLines.map((_, index) => (
+                <li className="comment-li" key={`blank-${index}`}>
+                  &nbsp;
+                </li> // Blank line
+              ))}
+              {account.comments.length > visibleCommentCount && (
+                <button
+                  className="load-more-comments-btn"
+                  onClick={loadMoreComments}
+                >
+                  More Comments
+                </button>
+              )}
+            </ul>
+          )}
         </div>
       </div>
-      <div className="comments">
-        <h3 onClick={() => setShowComments((prev) => !prev)}>Comments</h3>
-        {showComments && (
-          <ul className="comment-ul">
-            {account.comments.slice(0, visibleCommentCount).map((comment) => (
-              <li className="comment-li" key={comment.uuid}>
-                {isSpaceEventUpcoming(comment.eventDate) ? (
-                  <Link to={`/upcoming/${encodeURIComponent(comment.eventId)}`}>
-                    {comment.content.length > 30
-                      ? `${comment.content.slice(0, 30)}...`
-                      : comment.content}
-                  </Link>
-                ) : (
-                  <Link to={`/past/${encodeURIComponent(comment.eventId)}`}>
-                    {comment.content.length > 30
-                      ? `${comment.content.slice(0, 30)}...`
-                      : comment.content}
-                  </Link>
-                )}
-              </li>
-            ))}
-            {blankLines.map((_, index) => (
-              <li className="comment-li" key={`blank-${index}`}>
-                &nbsp;
-              </li> // Blank line
-            ))}
-            {account.comments.length > visibleCommentCount && (
-              <button
-                className="load-more-comments-btn"
-                onClick={loadMoreComments}
-              >
-                More Comments
-              </button>
-            )}
-          </ul>
-        )}
-      </div>
+
       <h3 className="saved-items-h3">
         <span
           onClick={() => {
@@ -252,25 +269,29 @@ const Profile = () => {
         )}
       </h3>
       {dropDownChoice === "Saved Events" && (
-        <ul>
+        <ul className="saved-item-ul">
           {savedEventsDetails.map((e) => (
             <SingleSpaceEvent key={e._id} oneEvent={e} />
           ))}
         </ul>
       )}
+
       {dropDownChoice === "Saved Articles" && (
-        <ul>
+        <ul className="saved-item-ul">
           {account.savedArticles.map((art) => (
             <SingleSpaceArticle key={art.id} spaceArticle={art} />
           ))}
         </ul>
       )}
       {dropDownChoice === "Saved Images" && (
-        <ul>
+        <ul className="saved-item-ul">
           {account.savedImages.map((i) => (
             <SpaceImage key={i.data[0].nasa_id} image={i} />
           ))}
         </ul>
+      )}
+      {!checkSavedItemExists() && (
+        <p style={{ textAlign: "center" }}>No {dropDownChoice}</p>
       )}
     </div>
   );

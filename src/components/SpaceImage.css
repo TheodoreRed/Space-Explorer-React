@@ -45,3 +45,8 @@
 .SpaceImage img:hover {
   transform: scale(1.01);
 }
+@media only screen and (min-width: 768px) {
+  .SpaceImage {
+    width: calc(50% - 70px);
+  }
+}

@@ -11,6 +11,7 @@
   margin-bottom: 20px;
   border-radius: 5px;
   text-align: center;
+  font-size: 1.2rem;
 }
 
 .SpacecraftDetails nav {
@@ -78,4 +79,24 @@
 
 .SpacecraftDetails .spacecraft-link:hover {
   background-color: #0056b3;
+}
+
+@media only screen and (min-width: 768px) {
+  .SpacecraftDetails .craft-detail-container {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .SpacecraftDetails .spacecraft-info {
+    width: 50%;
+  }
+
+  .SpacecraftDetails .craft-detail-right {
+    flex: 1;
+  }
 }

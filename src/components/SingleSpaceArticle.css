@@ -62,3 +62,9 @@
 .SingleSpaceArticle .save-btn:hover {
   background-color: #383838;
 }
+
+@media only screen and (min-width: 768px) {
+  .SingleSpaceArticle {
+    width: calc(50% - 70px);
+  }
+}

@@ -56,7 +56,7 @@
 .Header .googleIcon {
   position: absolute;
   top: 20px;
-  right: 55px;
+  right: 30px;
   color: green;
   font-size: 30px;
   cursor: pointer;
@@ -97,4 +97,97 @@
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
+}
+.Header .big-screen-sign-in-btn {
+  display: none;
+}
+
+.Header .tab-buttons {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .Header h1 .h1Content {
+    cursor: default;
+  }
+  .Header .is-big-screen-carrot {
+    display: none;
+  }
+  .Header .googleIcon {
+    display: none;
+  }
+  .Header .big-screen-sign-in-btn {
+    display: inline-block;
+    border: none;
+    font-size: 1.2rem;
+    color: green;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .Header .big-screen-sign-in-btn:hover {
+    color: rgb(113, 172, 113);
+  }
+
+  .Header .profileNavigationContainer {
+    margin-right: 20px;
+  }
+  .Header .tab-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    position: relative;
+  }
+
+  .Header .tab-buttons button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.6rem;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    z-index: 1000;
+  }
+  .Header .tab-buttons button:hover {
+    background-color: rgb(230, 230, 230);
+  }
+
+  .Header .learn-options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: -224px;
+    left: -35px;
+    background-color: black;
+    border: 5px outset white;
+  }
+  .Header .learn-options a,
+  .Header .events-options a {
+    color: white;
+    padding: 10px;
+  }
+  .Header .learn-options a:hover,
+  .Header .events-options a:hover {
+    background-color: rgb(94, 94, 94);
+  }
+
+  .Header .events-options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: -120px;
+    right: -15px;
+    border: 5px outset white;
+
+    background-color: black;
+  }
+
+  .Header #fancy-search {
+    background-color: white;
+    color: black;
+    transition: 0.3s ease;
+  }
+  .Header #fancy-search:hover {
+    background-color: rgb(230, 230, 230);
+  }
 }

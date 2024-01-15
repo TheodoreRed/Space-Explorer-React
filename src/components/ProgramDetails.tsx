@@ -8,14 +8,24 @@ interface Props {
 const ProgramDetails = ({ program }: Props) => {
   return (
     <div className="ProgramDetails">
-      <p>
-        Program:{" "}
-        <a href={program.wiki_url} target="_blank" rel="noopener noreferrer">
-          {program.name}
-        </a>
-      </p>
-      <p>Program Description: {program.description}</p>
-      {program.image_url && <img src={program.image_url} alt={program.name} />}
+      {program.image_url && (
+        <div className="program-details-left">
+          {program.image_url && (
+            <img src={program.image_url} alt={program.name} />
+          )}
+        </div>
+      )}
+      <div className="program-details-right">
+        <p>
+          <strong>Program:</strong>{" "}
+          <a href={program.wiki_url} target="_blank" rel="noopener noreferrer">
+            {program.name}
+          </a>
+        </p>
+        <p>
+          <strong>Program Description:</strong> {program.description}
+        </p>
+      </div>
     </div>
   );
 };

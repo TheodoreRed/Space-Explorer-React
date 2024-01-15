@@ -1,5 +1,8 @@
 .ArticlesList {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .ArticlesList .flex-btns {
   display: flex;

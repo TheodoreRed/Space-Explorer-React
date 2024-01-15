@@ -9,7 +9,8 @@
   background-color: #a7c3f0;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
 }
 
 .Astronauts nav {
@@ -122,4 +123,11 @@
 .Astronauts .age-range-container {
   display: flex;
   width: 90%;
+}
+
+@media only screen and (min-width: 768px) {
+  .Astronauts .filter-container {
+    align-self: center;
+    width: 40vw;
+  }
 }

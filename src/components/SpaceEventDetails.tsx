@@ -81,44 +81,53 @@ const SpaceEventDetails = ({ isPast }: Props) => {
               </div>
             )}
           </nav>
-          <h2 className="event-name-h2">{spaceEvent.name}</h2>
-          <p className="event-description">{spaceEvent.description}</p>
-          <p className="event-type">Event: {spaceEvent.type.name}</p>
-          <p className="event-date">Date: {spaceEvent.date.slice(0, 10)}</p>
-          <p className="event-description">
-            Interested: {spaceEvent.interested ?? 0}
-          </p>
-          {spaceEvent.news_url && (
-            <a
-              className="event-url"
-              href={spaceEvent.news_url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              News URL: {spaceEvent.news_url}
-            </a>
-          )}
-          {isPast && account && user ? (
-            <button className="event-btn" id="passed-btn" onClick={saveHandler}>
-              {eventIsSaved() ? "Saved" : "Save Past Event"}
-            </button>
-          ) : account && user ? (
-            <button className="event-btn" onClick={saveHandler}>
-              {eventIsSaved() ? "Event Saved" : "Save"}
-            </button>
-          ) : (
-            <button
-              style={{ backgroundColor: "purple" }}
-              className="event-btn"
-              onClick={signInWithGoogle}
-            >
-              Login To Save
-            </button>
-          )}
-
-          {spaceEvent.feature_image && (
-            <img src={spaceEvent.feature_image} alt={spaceEvent.name} />
-          )}
+          <div className="top-section-container">
+            <div className="big-screen-left">
+              <h2 className="event-name-h2">{spaceEvent.name}</h2>
+              <p className="event-description">{spaceEvent.description}</p>
+              <p className="event-type">Event: {spaceEvent.type.name}</p>
+              <p className="event-date">Date: {spaceEvent.date.slice(0, 10)}</p>
+              <p className="event-description">
+                Interested: {spaceEvent.interested ?? 0}
+              </p>
+              {spaceEvent.news_url && (
+                <a
+                  className="event-url"
+                  href={spaceEvent.news_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  News URL: {spaceEvent.news_url}
+                </a>
+              )}
+              {isPast && account && user ? (
+                <button
+                  className="event-btn"
+                  id="passed-btn"
+                  onClick={saveHandler}
+                >
+                  {eventIsSaved() ? "Saved" : "Save Past Event"}
+                </button>
+              ) : account && user ? (
+                <button className="event-btn" onClick={saveHandler}>
+                  {eventIsSaved() ? "Event Saved" : "Save"}
+                </button>
+              ) : (
+                <button
+                  style={{ backgroundColor: "purple" }}
+                  className="event-btn"
+                  onClick={signInWithGoogle}
+                >
+                  Login To Save
+                </button>
+              )}
+            </div>
+            <div className="big-screen-right">
+              {spaceEvent.feature_image && (
+                <img src={spaceEvent.feature_image} alt={spaceEvent.name} />
+              )}
+            </div>
+          </div>
 
           <div className="event-detailedInfo">
             <h3 className="event-details-h3">Event Details</h3>

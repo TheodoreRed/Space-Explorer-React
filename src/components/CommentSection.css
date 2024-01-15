@@ -26,12 +26,13 @@
   position: relative;
   align-items: center;
   justify-content: space-evenly;
+  padding-bottom: 30px;
 }
 
 .CommentSection .space-event-li img {
   border-radius: 50%;
   background-color: black;
-  width: 25%;
+  width: 20%;
   margin: 20px;
 }
 
@@ -51,8 +52,11 @@
   padding: 15px;
 }
 
-.CommentSection .comment-info .comment-date {
+.CommentSection .comment-date {
   padding: 15px;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
 }
 
 .CommentSection .comment-like {
@@ -180,4 +184,13 @@
 
 .CommentSection .load-more-btn:hover {
   background-color: #45a049;
+}
+
+@media only screen and (min-width: 768px) {
+  .CommentSection {
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

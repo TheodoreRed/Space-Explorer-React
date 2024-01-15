@@ -5,35 +5,67 @@
   font-family: "Arial", sans-serif;
   max-width: 100%;
   margin: auto;
+  margin-top: 20px;
 }
 
 .LaunchDetails p {
   color: #333;
   font-size: 14px;
-  margin-bottom: 10px;
+  padding: 5px;
 }
 
 .LaunchDetails .launch-image,
 .LaunchDetails .map-image {
   width: 100%;
   height: auto;
-  margin-top: 15px;
   border-radius: 4px;
 }
 
 .LaunchDetails .map-link {
   display: block;
-  margin-top: 15px;
+}
+
+.LaunchDetails .big-pad-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /* Adjustments for larger screens */
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .LaunchDetails {
     padding: 20px;
-    max-width: 700px;
+    width: 80%;
+    box-sizing: border-box;
   }
 
   .LaunchDetails p {
     font-size: 16px;
+  }
+
+  .LaunchDetails .big-launch-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .LaunchDetails .big-launch-container .launch-big-right {
+    flex: 1;
+  }
+  .LaunchDetails .big-launch-container .launch-big-left {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .LaunchDetails .big-pad-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .LaunchDetails .big-pad-container .pad-big-left {
+    flex: 1;
+    padding: 20px;
+  }
+  .LaunchDetails .big-pad-container .pad-big-right {
+    flex: 1;
   }
 }

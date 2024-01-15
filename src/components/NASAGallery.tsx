@@ -42,17 +42,19 @@ const NASAGallery = ({ images }: Props) => {
   }
 
   return (
-    <ul className="NASAGallery">
-      {shuffledImages.slice(0, visibleCount).map((nasaImage) => {
-        const hasValidLink = nasaImage.links && nasaImage.links.length > 0;
-        const hasImageData =
-          nasaImage.data &&
-          nasaImage.data.some((d) => d.media_type === "image");
+    <>
+      <ul className="NASAGallery">
+        {shuffledImages.slice(0, visibleCount).map((nasaImage) => {
+          const hasValidLink = nasaImage.links && nasaImage.links.length > 0;
+          const hasImageData =
+            nasaImage.data &&
+            nasaImage.data.some((d) => d.media_type === "image");
 
-        return hasValidLink && hasImageData ? (
-          <SpaceImage key={nasaImage.data[0].nasa_id} image={nasaImage} />
-        ) : null;
-      })}
+          return hasValidLink && hasImageData ? (
+            <SpaceImage key={nasaImage.data[0].nasa_id} image={nasaImage} />
+          ) : null;
+        })}
+      </ul>
       <div className="flex-btns">
         {visibleCount < images.length && (
           <button onClick={loadMoreImages}>Load More</button>
@@ -61,7 +63,7 @@ const NASAGallery = ({ images }: Props) => {
           <button onClick={() => setVisibleCount(1)}>Collapse</button>
         )}
       </div>
-    </ul>
+    </>
   );
 };
 

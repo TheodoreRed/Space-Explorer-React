@@ -23,17 +23,38 @@
 
 .ProgramDetails img {
   height: auto;
-  margin-top: 15px;
+  width: 70%;
+  margin: 10px 0;
   border-radius: 4px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Adjustments for larger screens */
 @media (min-width: 768px) {
   .ProgramDetails {
+    width: 80%;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    box-sizing: border-box;
   }
 
+  .ProgramDetails img {
+    width: 20vw;
+  }
   .ProgramDetails p {
-    font-size: 16px;
+    font-size: 20px;
+  }
+
+  .ProgramDetails .program-details-left {
+    flex: 1;
+    padding: 10px 20px;
+  }
+  .ProgramDetails .program-details-right {
+    flex: 3;
+    padding: 10px 20px;
   }
 }

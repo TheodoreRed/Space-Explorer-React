@@ -87,16 +87,23 @@ const ReplySection = ({
       <ul className="replies-list">
         {replies.map((reply) => (
           <li key={reply.uuid} className="reply-li">
-            <button className="trash-icon" onClick={() => handleDelete(reply)}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+            {reply.uid === account?.uid && (
+              <button
+                className="trash-icon"
+                onClick={() => handleDelete(reply)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            )}
             <div className="img-container">
               <img
                 src={`https://robohash.org/${reply.uniqueName}?set=set1`}
                 alt="robohash.org photo"
               />
-              <p>{formatTimeAgo(reply.createdAt.toString())}</p>
             </div>
+            <p className="time-ago-p">
+              {formatTimeAgo(reply.createdAt.toString())}
+            </p>
 
             <div className="reply-content-container">
               <strong>{reply.uniqueName}</strong>

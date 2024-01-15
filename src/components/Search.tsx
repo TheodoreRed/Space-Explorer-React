@@ -6,6 +6,8 @@ import SpaceImage from "./SpaceImage";
 import SpaceArticle from "../models/SpaceArticle";
 import SingleSpaceArticle from "./SingleSpaceArticle";
 import { getAllArticles } from "../services/spaceFlightNewsApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Search = () => {
   const [searchActive, setSearchActive] = useState(false);
@@ -58,6 +60,14 @@ const Search = () => {
         className="searchHeader"
         onClick={() => setNasaSeachApi((prev) => !prev)}
       >
+        <FontAwesomeIcon
+          style={{
+            paddingRight: "10px",
+            paddingBottom: "2px",
+            fontSize: "1rem",
+          }}
+          icon={faArrowRightArrowLeft}
+        />
         Search <span>{searchNasaApi ? `NASA Images` : "Space Articles"}</span>
       </h2>
       <form onSubmit={handleSearch} className="searchForm">
@@ -76,22 +86,34 @@ const Search = () => {
       </form>
       {searchActive && <p>{`Showing results for: ${lastSearch}`}</p>}
       {NASAImages && <p>{NASAImages.length} matches</p>}
-      {NASAImages &&
-        NASAImages.slice(0, visibleCount).map((image) => (
-          <SpaceImage key={image.data[0].nasa_id} image={image} />
-        ))}
-      {spaceArticles && <p>{spaceArticles.length} matches</p>}
-      {spaceArticles &&
-        spaceArticles
-          .slice(0, visibleCount)
-          .sort(
+      <ul className="space-images-ul">
+        {NASAImages &&
+          NASAImages.sort(
             (a, b) =>
-              new Date(b.updated_at).getTime() -
-              new Date(a.updated_at).getTime()
+              new Date(b.data[0].date_created).getTime() -
+              new Date(a.data[0].date_created).getTime()
           )
-          .map((article) => (
-            <SingleSpaceArticle key={article.id} spaceArticle={article} />
-          ))}
+            .slice(0, visibleCount)
+            .map((image) => (
+              <SpaceImage key={image.data[0].nasa_id} image={image} />
+            ))}
+      </ul>
+
+      {spaceArticles && <p>{spaceArticles.length} matches</p>}
+      <ul className="space-articles-ul">
+        {spaceArticles &&
+          spaceArticles
+            .slice(0, visibleCount)
+            .sort(
+              (a, b) =>
+                new Date(b.updated_at).getTime() -
+                new Date(a.updated_at).getTime()
+            )
+            .map((article) => (
+              <SingleSpaceArticle key={article.id} spaceArticle={article} />
+            ))}
+      </ul>
+
       {spaceArticles && visibleCount < spaceArticles.length && (
         <button className="load-more-btn" onClick={loadMore}>
           Load More

@@ -55,3 +55,10 @@
 .RelatedArticlesAndImages a:hover {
   text-decoration: underline; /* Underline on hover for interactivity */
 }
+
+@media only screen and (min-width: 768px) {
+  .RelatedArticlesAndImages {
+    max-width: 80%;
+    box-sizing: border-box;
+  }
+}

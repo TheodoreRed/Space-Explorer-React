@@ -12,14 +12,14 @@ const SpaceImage = ({ image }: Props) => {
   const title = image.data && image.data[0] ? image.data[0].title : "";
 
   return (
-    <div className="SpaceImage">
+    <li className="SpaceImage">
       {title && <h3>{title}</h3>}
       {imageUrl && (
         <Link to={`/search/images/${image.data[0].nasa_id}`}>
           <img src={imageUrl} alt={title} />
         </Link>
       )}
-    </div>
+    </li>
   );
 };
 

@@ -1,6 +1,7 @@
 .Profile {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 50px;
   padding: 10px;
   margin: 10px;
@@ -35,7 +36,7 @@
 
 .Profile .left .info-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -57,6 +58,7 @@
 }
 
 .Profile .comments {
+  margin-top: 20px;
   background-color: #90ee90;
   border: 1px solid black;
   padding: 20px;
@@ -101,6 +103,7 @@
   position: relative;
   padding: 10px;
   margin-bottom: 10px;
+  width: fit-content;
 }
 
 .Profile .flipUpsideDown {
@@ -175,5 +178,37 @@
 @media only screen and (min-width: 768px) {
   .Profile #new-name {
     width: fit-content;
+  }
+
+  .Profile .info-comment-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .Profile .comments {
+    width: 50%;
+    height: fit-content;
+    margin-top: 0;
+    margin-left: 10vw;
+  }
+
+  .Profile .saved-item-ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .Profile .saved-item-ul > li {
+    flex-basis: calc(50% - 10px);
+  }
+  .Profile .saved-item-ul .SingleSpaceArticle,
+  .Profile .saved-item-ul .SpaceImage {
+    flex-basis: calc(45% - 10px);
+  }
+
+  .Profile .dropdown {
+    width: 100%;
+    flex-direction: row;
+    padding: 10px;
+    gap: 10vw;
   }
 }

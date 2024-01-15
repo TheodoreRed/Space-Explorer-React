@@ -1,0 +1,12 @@
+.NASAGallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.flex-btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 29px;
+}

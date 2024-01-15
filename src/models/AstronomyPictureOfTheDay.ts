@@ -8,4 +8,3 @@ export default interface AstronomyPictureOfTheDay {
   title: string;
   url: string;
 }
-// useRef() to get the picture from the day before to only show images on the home page

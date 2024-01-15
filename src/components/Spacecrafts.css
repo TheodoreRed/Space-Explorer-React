@@ -10,6 +10,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   margin-top: 20px;
+  font-size: 1.2rem;
 }
 
 .Spacecrafts nav {
@@ -146,4 +147,11 @@
 
 .Spacecrafts .load-more-btn:hover {
   background-color: #45a049;
+}
+
+@media only screen and (min-width: 768px) {
+  .Spacecrafts .filter-container {
+    align-self: center;
+    width: 40vw;
+  }
 }
