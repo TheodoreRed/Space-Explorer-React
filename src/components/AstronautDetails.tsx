@@ -4,6 +4,7 @@ import { getAstronautById } from "../services/theSpaceDevsApi";
 import { Astronaut } from "../models/Astronaut";
 import "./AstronautDetails.css";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
+import LoadingGif from "./LoadingGif";
 
 export const formatTimeInSpace = (duration: string) => {
   const match = duration.match(/P(\d+D)?T(\d+H)?(\d+M)?(\d+S)?/);
@@ -42,7 +43,7 @@ const AstronautDetails = () => {
   }, [id]);
 
   if (!astronaut) {
-    return <div className="AstronautDetails-loading">Loading...</div>;
+    return <LoadingGif />;
   }
 
   const toggleDetailedBio = () => {

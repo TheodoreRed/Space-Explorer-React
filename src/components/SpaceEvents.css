@@ -81,19 +81,37 @@
 .SpaceEvents .load-more-btn {
   background-color: #4caf50;
   color: white;
-  border: none;
+  border: 1px solid black;
   border-radius: 4px;
   padding: 10px 20px;
   transition: 0.3s ease;
+}
+
+.SpaceEvents #collapse-btn-pse {
+  background-color: rgb(155, 119, 52);
+  border: none;
+}
+
+.SpaceEvents #collapse-btn-pse:hover {
+  background-color: rgb(212, 165, 76);
 }
 
 .SpaceEvents .load-more-btn:hover {
   background-color: #45a049;
 }
 
+.SpaceEvents .btns-container-se {
+  display: flex;
+  justify-content: space-around;
+}
+
 @media only screen and (min-width: 768px) {
   .SpaceEvents .filter-container {
     align-self: center;
     width: 40vw;
+  }
+
+  .SpaceEvents .load-more-btn {
+    width: 25%;
   }
 }

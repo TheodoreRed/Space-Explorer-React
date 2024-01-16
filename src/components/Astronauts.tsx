@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./Astronauts.css";
-import { getAllAstronauts } from "../services/theSpaceDevsApi";
 import { Astronaut } from "../models/Astronaut";
 import { Link } from "react-router-dom";
 import backup_img_one from "../assets/backup-astronaut.png";
 import LoadingGif from "./LoadingGif";
+import AstronautContext from "../context/AstronautContext";
 
 export const durationToSeconds = (duration: string) => {
   // Initialize total seconds to 0
@@ -25,53 +25,34 @@ export const durationToSeconds = (duration: string) => {
   return totalSeconds;
 };
 
-const shuffleAstronaut = (array: Astronaut[]) => {
-  // Iterate through the array backwards
-  for (let i = array.length - 1; i > 0; i--) {
-    // Generate a random index between 0 and i
-    const randomIndex = Math.floor(Math.random() * (i + 1));
-    // Store the value at index i in a temporary variable
-    let temp = array[i];
-    // Swap the value at index i with the value at the random index
-    array[i] = array[randomIndex];
-    // Set the value at the random index to the temporary variable
-    array[randomIndex] = temp;
-  }
-};
-
 const Astronauts = () => {
-  const [allAstronauts, setAllAstronauts] = useState<Astronaut[] | null>(null);
-  const [visibleCount, setVisibleCount] = useState(10); // Show 10 astronauts initially
+  const {
+    allAstronauts,
+    visibleCount,
+    setVisibleCount,
+    filterName,
+    setFilterName,
+    filterMinAge,
+    setFilterMinAge,
+    filterMaxAge,
+    setFilterMaxAge,
+    filterNationality,
+    setFilterNationality,
+    filterInSpace,
+    setFilterInSpace,
+    filterMostTimeInSpace,
+    setFilterMostTimeInSpace,
+    shuffledAstronauts,
+  } = useContext(AstronautContext);
 
   const [showFilterOptions, setShowFilterOptions] = useState(false);
-
-  const [filterName, setFilterName] = useState("");
-  const [filterMinAge, setFilterMinAge] = useState("");
-  const [filterMaxAge, setFilterMaxAge] = useState("");
-  const [filterNationality, setFilterNationality] = useState("");
-  const [filterInSpace, setFilterInSpace] = useState(false);
-  const [filterMostTimeInSpace, setFilterMostTimeInSpace] = useState(false);
-
-  const [shuffledAstronaut, setShuffledAstronaut] = useState<Astronaut[]>([]);
-
-  useEffect(() => {
-    if (allAstronauts) {
-      const shuffled = [...allAstronauts];
-      shuffleAstronaut(shuffled);
-      setShuffledAstronaut(shuffled);
-    }
-  }, [allAstronauts]);
-
-  useEffect(() => {
-    getAllAstronauts().then((res) => setAllAstronauts(res));
-  }, []);
 
   if (!allAstronauts) {
     return <LoadingGif />;
   }
 
   const loadMoreAstronauts = () => {
-    setVisibleCount((prevCount) => prevCount + 10); // Load 10 more astronauts
+    setVisibleCount(visibleCount + 10); // Load 10 more astronauts
   };
 
   const filterAstronauts = (astronauts: Astronaut[]) => {
@@ -168,14 +149,14 @@ const Astronauts = () => {
             />
             <div
               className="in-space-div"
-              onClick={() => setFilterInSpace((prev) => !prev)}
+              onClick={() => setFilterInSpace(!filterInSpace)}
             >
               Currently In Space {filterInSpace ? "☑" : "🔲"}
             </div>
 
             <div
               className="most-time-in-space-div"
-              onClick={() => setFilterMostTimeInSpace((prev) => !prev)}
+              onClick={() => setFilterMostTimeInSpace(!filterMostTimeInSpace)}
             >
               Most time in space {filterMostTimeInSpace ? "☑" : "🔲"}
             </div>
@@ -184,7 +165,7 @@ const Astronauts = () => {
       </div>
 
       <ul>
-        {filterAstronauts(shuffledAstronaut)
+        {filterAstronauts(shuffledAstronauts)
           .slice(0, visibleCount)
           .map((astronaut) => (
             <li key={astronaut.id} className="naut-container">

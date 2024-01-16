@@ -13,6 +13,7 @@ import { signInWithGoogle } from "../firebaseConfig";
 import { getAccountById } from "../services/accountApi";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
 import CommentSection from "./CommentSection";
+import LoadingGif from "./LoadingGif";
 
 interface Props {
   isPast?: boolean;
@@ -146,7 +147,7 @@ const SpaceEventDetails = ({ isPast }: Props) => {
           <RelatedArticlesAndImages keywords={spaceEvent.keyWords} />
         </div>
       ) : (
-        <p>Loading...</p>
+        <LoadingGif />
       )}
     </>
   );

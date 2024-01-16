@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { getSpacecraftById } from "../services/theSpaceDevsApi";
 import RelatedArticlesAndImages from "./RelatedArticlesAndImages";
 import { formatTimeInSpace } from "./AstronautDetails";
+import LoadingGif from "./LoadingGif";
 
 const SpacecraftDetails = () => {
   const [craft, setCraft] = useState<Spacecraft | null>(null);
@@ -21,7 +22,7 @@ const SpacecraftDetails = () => {
   }, [id]);
 
   if (!craft) {
-    return <p>Loading...</p>;
+    return <LoadingGif />;
   }
 
   return (

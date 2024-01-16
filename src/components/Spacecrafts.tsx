@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./Spacecrafts.css";
 import Spacecraft from "../models/Spacecraft";
-import { getAllSpacecrafts } from "../services/theSpaceDevsApi";
 import { durationToSeconds } from "./Astronauts";
 import { Link } from "react-router-dom";
 import LoadingGif from "./LoadingGif";
+import SpacecraftContext from "../context/SpacecraftContext";
 
 const Spacecrafts = () => {
-  const [allSpacecrafts, setAllSpacecrafts] = useState<Spacecraft[] | null>(
-    null
-  );
-  const [visibleCount, setVisibleCount] = useState(10);
+  const {
+    allSpacecrafts,
+    visibleCount,
+    setVisibleCount,
+    filterSearch,
+    setFilterSearch,
+    filterInSpace,
+    setFilterInSpace,
+    filterMostTimeInSpace,
+    setFilterMostTimeInSpace,
+  } = useContext(SpacecraftContext);
 
   const [showFilterOptions, setShowFilterOptions] = useState(false);
 
-  const [filterSearch, setFilterSearch] = useState("");
-  const [filterInSpace, setFilterInSpace] = useState(false);
-  const [filterMostTimeInSpace, setFilterMostTimeInSpace] = useState(false);
-
   const loadMoreSpaceEvents = () => {
-    setVisibleCount((prevCount) => prevCount + 10); // Load 10 more
+    setVisibleCount(visibleCount + 10); // Load 10 more
   };
-
-  useEffect(() => {
-    getAllSpacecrafts().then((res) => setAllSpacecrafts(res));
-  }, []);
 
   if (!allSpacecrafts) {
     return <LoadingGif />;
@@ -81,13 +80,13 @@ const Spacecrafts = () => {
             />
             <div
               className="in-space-div"
-              onClick={() => setFilterInSpace((prev) => !prev)}
+              onClick={() => setFilterInSpace(!filterInSpace)}
             >
               Currently In Space {filterInSpace ? "☑" : "🔲"}
             </div>
             <div
               className="most-time-in-space-div"
-              onClick={() => setFilterMostTimeInSpace((prev) => !prev)}
+              onClick={() => setFilterMostTimeInSpace(!filterMostTimeInSpace)}
             >
               Most time in space {filterMostTimeInSpace ? "☑" : "🔲"}
             </div>
@@ -99,7 +98,7 @@ const Spacecrafts = () => {
           filterSpacecrafts(allSpacecrafts)
             .slice(0, visibleCount)
             .map((craft) => (
-              <li className="craft-li">
+              <li key={craft._id} className="craft-li">
                 <div className="left">
                   <img
                     src={craft.spacecraft_config.image_url}

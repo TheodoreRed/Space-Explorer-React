@@ -91,9 +91,31 @@
   background-color: #45a049;
 }
 
+.PastEvents #collapse-btn-se {
+  background-color: rgb(155, 119, 52);
+  border: none;
+}
+
+.PastEvents #collapse-btn-se:hover {
+  background-color: rgb(212, 165, 76);
+}
+
+.PastEvents .load-more-btn:hover {
+  background-color: #45a049;
+}
+
+.PastEvents .btns-container-se {
+  display: flex;
+  justify-content: space-around;
+}
+
 @media only screen and (min-width: 768px) {
   .PastEvents .filter-container {
     align-self: center;
     width: 40vw;
+  }
+
+  .PastEvents .load-more-btn {
+    width: 25%;
   }
 }

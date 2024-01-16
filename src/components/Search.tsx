@@ -1,29 +1,33 @@
-import { useState } from "react";
+import { useContext } from "react";
 import "./Search.css";
-import NASAImage from "../models/NASAImage";
 import { getNASAImagesBySearch } from "../services/nasaApi";
 import SpaceImage from "./SpaceImage";
-import SpaceArticle from "../models/SpaceArticle";
 import SingleSpaceArticle from "./SingleSpaceArticle";
 import { getAllArticles } from "../services/spaceFlightNewsApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import SearchContext from "../context/SearchContext";
 
 const Search = () => {
-  const [searchActive, setSearchActive] = useState(false);
-  const [searchNasaApi, setNasaSeachApi] = useState(false);
+  const {
+    searchActive,
+    setSearchActive,
+    searchNasaApi,
+    setNasaSearchApi,
+    searchText,
+    setSearchText,
+    lastSearch,
+    setLastSearch,
+    NASAImages,
+    setNASAImages,
+    spaceArticles,
+    setSpaceArticles,
+    visibleCount,
+    setVisibleCount,
+  } = useContext(SearchContext);
 
-  const [searchText, setSearchText] = useState("");
-  const [lastSearch, setLastSearch] = useState("");
-
-  const [NASAImages, setNASAImages] = useState<NASAImage[] | null>(null);
-  const [spaceArticles, setSpaceArticles] = useState<SpaceArticle[] | null>(
-    null
-  );
-
-  const [visibleCount, setVisibleCount] = useState(10);
   const loadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 10); // Load 10 more
+    setVisibleCount(visibleCount + 10); // Load 10 more
   };
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +62,7 @@ const Search = () => {
     <div className={`Search ${searchActive ? "active" : ""}`}>
       <h2
         className="searchHeader"
-        onClick={() => setNasaSeachApi((prev) => !prev)}
+        onClick={() => setNasaSearchApi(!searchNasaApi)}
       >
         <FontAwesomeIcon
           style={{

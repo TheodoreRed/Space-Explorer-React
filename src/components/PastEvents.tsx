@@ -1,38 +1,35 @@
 import SpaceEvent from "../models/SpaceEvent";
-import { getAllSpaceEvents } from "../services/theSpaceDevsApi";
 import "./PastEvents.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import SingleSpaceEvent from "./SingleSpaceEvent";
 import AuthContext from "../context/AuthContext";
 import LoadingGif from "./LoadingGif";
+import SpaceEventsContext from "../context/SpaceEventsContext";
 
 const PastEvents = () => {
   const { account } = useContext(AuthContext);
-
-  const [pastEvents, setpastEvents] = useState<SpaceEvent[] | null>(null);
-  const [visibleCount, setVisibleCount] = useState(10);
+  const {
+    spaceEvents,
+    visibleCount,
+    setVisibleCount,
+    loadMoreSpaceEvents,
+    filterSearch,
+    setFilterSearch,
+    filterMinYear,
+    setFilterMinYear,
+    filterMaxYear,
+    setFilterMaxYear,
+    filterMinMonth,
+    setFilterMinMonth,
+    filterMaxMonth,
+    setFilterMaxMonth,
+    filterSavedEvents,
+    setFilterSavedEvents,
+  } = useContext(SpaceEventsContext);
 
   const [showFilterOptions, setShowFilterOptions] = useState(false);
 
-  const [filterSearch, setFilterSearch] = useState("");
-
-  const [filterMinYear, setFilterMinYear] = useState("");
-  const [filterMaxYear, setFilterMaxYear] = useState("");
-
-  const [filterMinMonth, setFilterMinMonth] = useState("");
-  const [filterMaxMonth, setFilterMaxMonth] = useState("");
-
-  const [filterSavedEvents, setFilterSavedEvents] = useState(false);
-
-  const loadMoreSpaceEvents = () => {
-    setVisibleCount((prevCount) => prevCount + 10); // Load 10 more
-  };
-
-  useEffect(() => {
-    getAllSpaceEvents().then((res) => setpastEvents(res));
-  }, []);
-
-  if (!pastEvents) {
+  if (!spaceEvents) {
     return <LoadingGif />;
   }
 
@@ -134,7 +131,7 @@ const PastEvents = () => {
             {account && (
               <div
                 className="saved-events-div"
-                onClick={() => setFilterSavedEvents((prev) => !prev)}
+                onClick={() => setFilterSavedEvents(!filterSavedEvents)}
               >
                 My Saved Events {filterSavedEvents ? "☑" : "🔲"}
               </div>
@@ -143,7 +140,7 @@ const PastEvents = () => {
         )}
       </div>
       <ul>
-        {filterEvents(pastEvents)
+        {filterEvents(spaceEvents)
           .slice(0, visibleCount)
           .map((oneEvent) => {
             return (
@@ -155,11 +152,23 @@ const PastEvents = () => {
             );
           })}
       </ul>
-      {pastEvents && visibleCount < filterEvents(pastEvents).length && (
-        <button className="load-more-btn" onClick={loadMoreSpaceEvents}>
-          Load More
-        </button>
-      )}
+
+      <div className="btns-container-se">
+        {spaceEvents && visibleCount < filterEvents(spaceEvents).length && (
+          <button className="load-more-btn" onClick={loadMoreSpaceEvents}>
+            Load More
+          </button>
+        )}
+        {spaceEvents && visibleCount < filterEvents(spaceEvents).length && (
+          <button
+            className="load-more-btn"
+            id="collapse-btn-se"
+            onClick={() => setVisibleCount(5)}
+          >
+            Collapse
+          </button>
+        )}
+      </div>
     </div>
   );
 };
