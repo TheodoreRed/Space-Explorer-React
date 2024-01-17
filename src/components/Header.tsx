@@ -76,52 +76,55 @@ const Header = () => {
         </button>
       </div>
 
-      {user ? (
-        <>
-          <FontAwesomeIcon
-            onClick={() => {
-              setShowMainNav(false);
-              setShowProfileNav((prev) => !prev);
-            }}
-            icon={faGoogle}
-            className={`googleIcon ${showProfileNav ? "iconActive" : ""}`}
-          />
-          {account ? (
-            <p
+      <FontAwesomeIcon
+        onClick={() => {
+          setShowMainNav(false);
+          setShowProfileNav((prev) => !prev);
+        }}
+        icon={faGoogle}
+        className={`googleIcon ${showProfileNav ? "iconActive" : ""}`}
+      />
+
+      <p
+        className="big-screen-sign-in-btn"
+        onClick={() => {
+          setShowLearnTab(false);
+          setShowEventsTab(false);
+          setShowMainNav(false);
+          setShowProfileNav((prev) => !prev);
+        }}
+      >
+        Welcome,{" "}
+        {user && account && account.uniqueName ? account.uniqueName : "Guest"}
+      </p>
+
+      <div
+        className={`profileNavigationContainer ${
+          showProfileNav && "navActive"
+        }`}
+        onClick={() => setShowProfileNav(false)}
+      >
+        {user && <Link to="/me">Profile</Link>}
+        <Link to="/">Home</Link>
+
+        {user && account ? (
+          <button className="signOutBtn" onClick={signOut}>
+            Sign Out
+          </button>
+        ) : (
+          <>
+            <button
               className="big-screen-sign-in-btn"
-              onClick={() => {
-                setShowLearnTab(false);
-                setShowEventsTab(false);
-                setShowMainNav(false);
-                setShowProfileNav((prev) => !prev);
-              }}
+              onClick={signInWithGoogle}
             >
-              Welcome, {account.uniqueName}
-            </p>
-          ) : (
-            <button className="big-screen-sign-in-btn">
               Sign In With Google
             </button>
-          )}
-          <div
-            className={`profileNavigationContainer ${
-              showProfileNav && "navActive"
-            }`}
-            onClick={() => setShowProfileNav(false)}
-          >
-            {user && <Link to="/me">Profile</Link>}
-            <Link to="/">Home</Link>
-
-            <button className="signOutBtn" onClick={signOut}>
-              Sign Out
+            <button className="signInBtn" onClick={signInWithGoogle}>
+              Sign In With Google
             </button>
-          </div>
-        </>
-      ) : (
-        <button className="signInBtn" onClick={signInWithGoogle}>
-          Sign In With Google
-        </button>
-      )}
+          </>
+        )}
+      </div>
     </header>
   );
 };

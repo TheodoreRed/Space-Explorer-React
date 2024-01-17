@@ -56,8 +56,8 @@
 }
 
 .PlanetDetails .known-for ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: square;
+  margin-left: 20px;
 }
 
 .PlanetDetails .known-for li {
@@ -85,4 +85,26 @@
 
 .PlanetDetails a:hover {
   text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+  .PlanetDetails .everything-but-related {
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .PlanetDetails .giant-screen {
+    display: flex;
+    gap: 10px;
+  }
+  .PlanetDetails .giant-screen section {
+    flex: 1;
+  }
 }

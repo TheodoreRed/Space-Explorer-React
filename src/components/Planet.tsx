@@ -9,15 +9,20 @@ interface Props {
 const Planet = ({ planet }: Props) => {
   return (
     <div className="Planet">
-      <h2>{planet.name}</h2>
-      <p>{planet.description}</p>
-      <img
-        src={planet.images[Math.floor(Math.random() * planet.images.length)]}
-        alt=""
-      />
-      <Link to={`/planets/${encodeURIComponent(planet.name)}`}>
-        <button>Details</button>
-      </Link>
+      <div className="planet-left">
+        <h2>{planet.name}</h2>
+        <p>{planet.description}</p>
+      </div>
+
+      <div className="planet-right">
+        <img
+          src={planet.images[Math.floor(Math.random() * planet.images.length)]}
+          alt=""
+        />
+        <Link to={`/planets/${encodeURIComponent(planet.name)}`}>
+          <button>Details</button>
+        </Link>
+      </div>
     </div>
   );
 };

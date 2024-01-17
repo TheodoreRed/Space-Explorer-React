@@ -44,6 +44,7 @@ function App() {
         <Route path="/upcoming/:id" element={<SpaceEventDetails />} />
         <Route path="/past" element={<PastEvents />} />
         <Route path="/past/:id" element={<SpaceEventDetails isPast={true} />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
