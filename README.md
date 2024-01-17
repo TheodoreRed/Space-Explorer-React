@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# Space Explorer Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Space Explorer is a user-focused web application designed for exploring and learning about astronauts, spacecrafts, and space events. It also provides a search feature for NASA images and space-related articles. This repository contains the frontend portion of Space Explorer, currently live at [space-explorer.xyz](https://space-explorer.xyz).
 
-Currently, two official plugins are available:
+## Key Features
+- **Explore Astronauts and Spacecrafts**: Access detailed information about space missions and their explorers.
+- **Keep Up with Space Events**: Get informed about upcoming and past space events.
+- **NASA Library Access**: Search and view NASA’s extensive collection of images and articles.
+- **User Profile Customization**: Personalize settings and manage profiles.
+- **Responsive Design**: A user interface that adapts to different screen sizes for a consistent experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technology Stack
+- **React**: Utilized for developing the interactive user interface.
+- **TypeScript**: Ensures code reliability and maintainability.
+- **Vite**: A build tool for a more efficient development process.
+- **Firebase**: Handles user authentication and application deployment.
+- **Axios**: Manages HTTP requests to the backend.
 
-## Expanding the ESLint configuration
+## Installation Guide
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the necessary dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Application Components
+The app is structured into various key sections:
+- **Home**: The main landing page.
+- **Search Functionality**: For looking up images, articles, astronauts, and spacecrafts.
+- **Planet Information**: Discover facts about different planets.
+- **Astronauts/Spacecrafts Details**: Detailed profiles and information.
+- **Space Events Timeline**: Information on space events, past and upcoming.
+- **User Profile**: Manage user-specific settings.
 
-- Configure the top-level `parserOptions` property like this:
+React Router is used for smooth navigation between these sections.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Deployment
+The frontend is live and can be accessed at [space-explorer.xyz](https://space-explorer.xyz). For local development, the project can be run with the command `npm run dev` after completing the installation steps.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Contributing
+Contributions to enhance the application’s features or design are welcome.
+
+---
